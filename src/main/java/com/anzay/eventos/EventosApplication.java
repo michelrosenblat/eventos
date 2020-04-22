@@ -52,6 +52,7 @@ public class EventosApplication implements CommandLineRunner {
 		modalidadeRepository.saveAll(Arrays.asList(mod1, mod2));
 
 		estiloRepository.saveAll(Arrays.asList(est1, est2, est3, est4, est5, est6));
+
 	}
 
 }
