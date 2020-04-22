@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.anzay.eventos.domain.Modalidade;
 import com.anzay.eventos.repositories.ModalidadeRepository;
+import com.anzay.eventos.services.exceptions.ObjectNotFoundException;
+
 
 @Service
 public class ModalidadeService {
@@ -18,7 +20,9 @@ public class ModalidadeService {
 		
 		Optional<Modalidade> obj = repo.findById(id);
 		
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + 
+				" - Tipo: " + Modalidade.class.getName()) );
 		
 	}
 

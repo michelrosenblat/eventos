@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Estilo implements Serializable {
 
@@ -22,6 +24,7 @@ public class Estilo implements Serializable {
 	private Integer id;
 	private String nome;
 
+	@JsonBackReference
 	@ManyToMany
 	@JoinTable(
 			name = "ESTILOS_DA_MODALIDE",
