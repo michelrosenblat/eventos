@@ -8,25 +8,33 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 @Entity
-public class Modalidade implements Serializable {
+public class Estilo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 
-	@ManyToMany(mappedBy = "modalidades")
-	private List<Estilo> estilos = new ArrayList<>();
+	@ManyToMany
+	@JoinTable(
+			name = "ESTILOS_DA_MODALIDE",
+			joinColumns = @JoinColumn(name = "estilo_id"),
+			inverseJoinColumns = @JoinColumn(name = "modalidade_id")
+	)
+	private List<Modalidade> modalidades = new ArrayList<>();
 	
-	public Modalidade() {
+	public Estilo() {
+	
 	}
 
-	public Modalidade(Integer id, String nome) {
+	public Estilo(Integer id, String nome) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -48,15 +56,14 @@ public class Modalidade implements Serializable {
 		this.nome = nome;
 	}
 
-	public List<Estilo> getEstilo() {
-		return estilos;
+	public List<Modalidade> getModalidades() {
+		return modalidades;
 	}
 
-	public void setEstilo(List<Estilo> estilo) {
-		this.estilos = estilo;
+	public void setModalidades(List<Modalidade> modalidades) {
+		this.modalidades = modalidades;
 	}
 
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -73,7 +80,7 @@ public class Modalidade implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Modalidade other = (Modalidade) obj;
+		Estilo other = (Estilo) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -81,5 +88,5 @@ public class Modalidade implements Serializable {
 			return false;
 		return true;
 	}
-	
+
 }
