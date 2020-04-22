@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class TipoParticipante implements Serializable {
+public class Classe implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -16,14 +16,12 @@ public class TipoParticipante implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	private Integer minParticipantes;
-	private Integer maxParticipantes;
-	
-	public TipoParticipante() {
+
+	public Classe() {
 		
 	}
 
-	public TipoParticipante(Integer id, String nome, Integer minParticipantes, Integer maxParticipantes) {
+	public Classe(Integer id, String nome) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -45,15 +43,6 @@ public class TipoParticipante implements Serializable {
 		this.nome = nome;
 	}
 
-	public Integer getMinParticipantes() {
-		return minParticipantes;
-	}
-
-	public void setMinParticipantes(Integer minParticipantes) {
-		this.minParticipantes = minParticipantes;
-	}
-	
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -70,7 +59,7 @@ public class TipoParticipante implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TipoParticipante other = (TipoParticipante) obj;
+		Classe other = (Classe) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -78,7 +67,7 @@ public class TipoParticipante implements Serializable {
 			return false;
 		return true;
 	}
-
-
+	
+	
 	
 }

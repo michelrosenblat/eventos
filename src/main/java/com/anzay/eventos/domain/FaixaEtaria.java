@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class TipoParticipante implements Serializable {
+public class FaixaEtaria implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -16,51 +16,72 @@ public class TipoParticipante implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	private Integer minParticipantes;
-	private Integer maxParticipantes;
-	
-	public TipoParticipante() {
+	private Integer idadeMin;
+	private Integer idadeMax;
+
+	public FaixaEtaria() {
 		
 	}
 
-	public TipoParticipante(Integer id, String nome, Integer minParticipantes, Integer maxParticipantes) {
+	
+
+	public FaixaEtaria(Integer id, String nome, Integer idadeMin, Integer idadeMax) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.idadeMin = idadeMin;
+		this.idadeMax = idadeMax;
 	}
+
+
 
 	public Integer getId() {
 		return id;
 	}
 
+
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
+
 
 	public String getNome() {
 		return nome;
 	}
 
+
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-	public Integer getMinParticipantes() {
-		return minParticipantes;
+
+
+	public Integer getIdadeMin() {
+		return idadeMin;
 	}
 
-	public void setMinParticipantes(Integer minParticipantes) {
-		this.minParticipantes = minParticipantes;
+
+
+	public void setIdadeMin(Integer idadeMin) {
+		this.idadeMin = idadeMin;
 	}
-	
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
+
+
+
+	public Integer getIdadeMax() {
+		return idadeMax;
 	}
+
+
+
+	public void setIdadeMax(Integer idadeMax) {
+		this.idadeMax = idadeMax;
+	}
+
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -70,7 +91,7 @@ public class TipoParticipante implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TipoParticipante other = (TipoParticipante) obj;
+		FaixaEtaria other = (FaixaEtaria) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -78,7 +99,7 @@ public class TipoParticipante implements Serializable {
 			return false;
 		return true;
 	}
-
-
+	
+	
 	
 }
