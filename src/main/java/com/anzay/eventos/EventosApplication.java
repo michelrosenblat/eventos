@@ -7,6 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.anzay.eventos.domain.Classe;
 import com.anzay.eventos.domain.Endereco;
 import com.anzay.eventos.domain.Estilo;
 import com.anzay.eventos.domain.FaixaEtaria;
@@ -15,6 +16,7 @@ import com.anzay.eventos.domain.Pessoa;
 import com.anzay.eventos.domain.TipoParticipante;
 import com.anzay.eventos.domain.enums.TipoDocumento;
 import com.anzay.eventos.domain.enums.TipoPessoa;
+import com.anzay.eventos.repositories.ClasseRepository;
 import com.anzay.eventos.repositories.EnderecoRepository;
 import com.anzay.eventos.repositories.EstiloRepository;
 import com.anzay.eventos.repositories.FaixaEtariaRepository;
@@ -43,7 +45,10 @@ public class EventosApplication implements CommandLineRunner {
 	@Autowired
 	private EnderecoRepository enderecoRepository;
 	
+	@Autowired
+	private ClasseRepository classeRepository;
 	
+		
 	
 	
 	public static void main(String[] args) {
@@ -81,6 +86,20 @@ public class EventosApplication implements CommandLineRunner {
 		Estilo lat4 = new Estilo( null, "Paso Doble");
 		Estilo lat5 = new Estilo( null, "Jive");	
 
+		Classe cls1 = new Classe(null, "A");
+		Classe cls2 = new Classe(null, "B");
+		Classe cls3 = new Classe(null, "C");
+		Classe cls4 = new Classe(null, "D");
+		Classe cls5 = new Classe(null, "E");
+		Classe cls6 = new Classe(null, "F");
+
+		Classe cls7 = new Classe(null, "A");
+		Classe cls8 = new Classe(null, "B");
+		Classe cls9 = new Classe(null, "C");
+		Classe cls10 = new Classe(null, "D");
+		Classe cls11 = new Classe(null, "E");
+		Classe cls12 = new Classe(null, "F");
+
 		// ASSOCIAÇÕES Modalidades e Estilos - Standard e Latin
 
 		// Insere Estilos nas Modalidades
@@ -99,13 +118,35 @@ public class EventosApplication implements CommandLineRunner {
 		lat4.getModalidades().addAll(Arrays.asList( modLat ));
 		lat5.getModalidades().addAll(Arrays.asList( modLat ));
 
+		// ASSOCIAÇÕES Modalidades e Classes
+
+		// Insere Classes nas Modalidades
+		modStd.getClasse().addAll(Arrays.asList(cls1, cls2, cls3, cls4, cls5, cls6));
+		modLat.getClasse().addAll(Arrays.asList(cls7, cls8, cls9, cls10, cls11, cls12));
+		
+		// Insere as Modalidades nas Classes
+		cls1.getModalidades().addAll(Arrays.asList( modStd ));
+		cls2.getModalidades().addAll(Arrays.asList( modStd ));
+		cls3.getModalidades().addAll(Arrays.asList( modStd ));
+		cls4.getModalidades().addAll(Arrays.asList( modStd ));
+		cls5.getModalidades().addAll(Arrays.asList( modStd ));
+		cls6.getModalidades().addAll(Arrays.asList( modStd ));
+		cls7.getModalidades().addAll(Arrays.asList( modLat ));
+		cls8.getModalidades().addAll(Arrays.asList( modLat ));
+		cls9.getModalidades().addAll(Arrays.asList( modLat ));
+		cls10.getModalidades().addAll(Arrays.asList( modLat ));
+		cls11.getModalidades().addAll(Arrays.asList( modLat ));
+		cls12.getModalidades().addAll(Arrays.asList( modLat ));
+
 		// Salva 
 		modalidadeRepository.saveAll(Arrays.asList(modStd, modLat));
 
 		estiloRepository.saveAll(Arrays.asList(std1, std2, std3, std4, std5));
 		
 		estiloRepository.saveAll(Arrays.asList(lat1, lat2, lat3, lat4, lat5));
-		
+
+		classeRepository.saveAll(Arrays.asList(cls1, cls2, cls3, cls4, cls5, cls6));
+		classeRepository.saveAll(Arrays.asList(cls7, cls8, cls9, cls10, cls11, cls12));
 		
 		// -------------------------------
 		// DANÇA DE SALÃO

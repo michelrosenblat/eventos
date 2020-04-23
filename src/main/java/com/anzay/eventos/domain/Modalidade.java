@@ -25,6 +25,12 @@ public class Modalidade implements Serializable {
 	@JsonManagedReference
 	@ManyToMany(mappedBy = "modalidades")
 	private List<Estilo> estilos = new ArrayList<>();
+
+	@JsonManagedReference
+	@ManyToMany(mappedBy = "modalidades")
+	private List<Classe> classes = new ArrayList<>();
+	
+	
 	
 	public Modalidade() {
 	}
@@ -58,6 +64,15 @@ public class Modalidade implements Serializable {
 	public void setEstilo(List<Estilo> estilo) {
 		this.estilos = estilo;
 	}
+
+	public List<Classe> getClasse() {
+		return classes;
+	}
+
+	public void setClasse(List<Classe> classe) {
+		this.classes = classe;
+	}
+
 
 	
 	@Override

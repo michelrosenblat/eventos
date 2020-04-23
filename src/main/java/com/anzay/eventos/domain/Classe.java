@@ -1,11 +1,18 @@
 package com.anzay.eventos.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Classe implements Serializable {
@@ -17,6 +24,16 @@ public class Classe implements Serializable {
 	private Integer id;
 	private String nome;
 
+	@JsonBackReference
+	@ManyToMany
+	@JoinTable(
+			name = "CLASSES_DA_MODALIDE",
+			joinColumns = @JoinColumn(name = "classe_id"),
+			inverseJoinColumns = @JoinColumn(name = "modalidade_id")
+	)
+	private List<Modalidade> modalidades = new ArrayList<>();
+	
+	
 	public Classe() {
 		
 	}
@@ -43,7 +60,15 @@ public class Classe implements Serializable {
 		this.nome = nome;
 	}
 
-	@Override
+	public List<Modalidade> getModalidades() {
+		return modalidades;
+	}
+
+	public void setModalidades(List<Modalidade> modalidades) {
+		this.modalidades = modalidades;
+	}
+
+		@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
