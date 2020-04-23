@@ -23,11 +23,18 @@ public class TipoParticipante implements Serializable {
 		
 	}
 
+	
 	public TipoParticipante(Integer id, String nome, Integer minParticipantes, Integer maxParticipantes) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.minParticipantes = minParticipantes;
+		this.maxParticipantes = maxParticipantes;
 	}
+
+
+
+
 
 	public Integer getId() {
 		return id;
@@ -52,8 +59,15 @@ public class TipoParticipante implements Serializable {
 	public void setMinParticipantes(Integer minParticipantes) {
 		this.minParticipantes = minParticipantes;
 	}
-	
-	
+
+	public Integer getMaxParticipantes() {
+		return maxParticipantes;
+	}
+
+	public void setMaxParticipantes(Integer maxParticipantes) {
+		this.maxParticipantes = maxParticipantes;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

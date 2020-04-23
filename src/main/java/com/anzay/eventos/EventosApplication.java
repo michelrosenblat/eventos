@@ -7,13 +7,19 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.anzay.eventos.domain.Endereco;
 import com.anzay.eventos.domain.Estilo;
 import com.anzay.eventos.domain.FaixaEtaria;
 import com.anzay.eventos.domain.Modalidade;
+import com.anzay.eventos.domain.Pessoa;
 import com.anzay.eventos.domain.TipoParticipante;
+import com.anzay.eventos.domain.enums.TipoDocumento;
+import com.anzay.eventos.domain.enums.TipoPessoa;
+import com.anzay.eventos.repositories.EnderecoRepository;
 import com.anzay.eventos.repositories.EstiloRepository;
 import com.anzay.eventos.repositories.FaixaEtariaRepository;
 import com.anzay.eventos.repositories.ModalidadeRepository;
+import com.anzay.eventos.repositories.PessoaRepository;
 import com.anzay.eventos.repositories.TipoParticipanteRepository;
 
 @SpringBootApplication
@@ -31,6 +37,12 @@ public class EventosApplication implements CommandLineRunner {
 	@Autowired
 	private TipoParticipanteRepository tipoParticipanteRepository;
 	
+	@Autowired
+	private PessoaRepository pessoaRepository;
+	
+	@Autowired
+	private EnderecoRepository enderecoRepository;
+	
 	
 	
 	
@@ -41,43 +53,65 @@ public class EventosApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		// DANÇA ESPORTIVA STANDARD
+		
+		// CARGA NO BANDO DE DADOS
+		
+		// ############################################################################
+		//
+		//	MODALIDADES E ESTILOS
+		//
+		
+		// -------------------------------
+		// DANÇA ESPORTIVA
+		// -------------------------------
 
-		Modalidade std = new Modalidade( null, "Standard");
+		// Cria Modalidades
+		Modalidade modStd = new Modalidade( null, "Standard");
+		Modalidade modLat = new Modalidade( null, "Latin");
+
+		// Cria Estilos
 		Estilo std1 = new Estilo( null, "Waltz");
 		Estilo std2 = new Estilo( null, "Tango");
 		Estilo std3 = new Estilo( null, "Viennese Waltz");
 		Estilo std4 = new Estilo( null, "Slow Foxtrot");
 		Estilo std5 = new Estilo( null, "Quickstep");
-
-		std.getEstilo().addAll(Arrays.asList(std1, std2, std3, std4, std5));
-		
-		std1.getModalidades().addAll(Arrays.asList(std));
-		std2.getModalidades().addAll(Arrays.asList(std));
-		std3.getModalidades().addAll(Arrays.asList(std));
-		std4.getModalidades().addAll(Arrays.asList(std));
-		std5.getModalidades().addAll(Arrays.asList(std));
-
-		// DANÇA ESPORTIVA LATIN
-		
-		Modalidade lat = new Modalidade( null, "Latin");
 		Estilo lat1 = new Estilo( null, "Samba");
 		Estilo lat2 = new Estilo( null, "Cha-Cha-Cha");
 		Estilo lat3 = new Estilo( null, "Rumba");
 		Estilo lat4 = new Estilo( null, "Paso Doble");
 		Estilo lat5 = new Estilo( null, "Jive");	
-		
-		lat.getEstilo().addAll(Arrays.asList(lat1, lat2, lat3, lat4, lat5));
 
-		lat1.getModalidades().addAll(Arrays.asList(lat));
-		lat2.getModalidades().addAll(Arrays.asList(lat));
-		lat3.getModalidades().addAll(Arrays.asList(lat));
-		lat4.getModalidades().addAll(Arrays.asList(lat));
-		lat5.getModalidades().addAll(Arrays.asList(lat));
+		// ASSOCIAÇÕES Modalidades e Estilos - Standard e Latin
 
+		// Insere Estilos nas Modalidades
+		modStd.getEstilo().addAll(Arrays.asList(std1, std2, std3, std4, std5));
+		modLat.getEstilo().addAll(Arrays.asList(lat1, lat2, lat3, lat4, lat5));
 		
+		// Insere as Modalidades nos Estilos
+		std1.getModalidades().addAll(Arrays.asList( modStd ));
+		std2.getModalidades().addAll(Arrays.asList( modStd ));
+		std3.getModalidades().addAll(Arrays.asList( modStd ));
+		std4.getModalidades().addAll(Arrays.asList( modStd ));
+		std5.getModalidades().addAll(Arrays.asList( modStd ));
+		lat1.getModalidades().addAll(Arrays.asList( modLat ));
+		lat2.getModalidades().addAll(Arrays.asList( modLat ));
+		lat3.getModalidades().addAll(Arrays.asList( modLat ));
+		lat4.getModalidades().addAll(Arrays.asList( modLat ));
+		lat5.getModalidades().addAll(Arrays.asList( modLat ));
+
+		// Salva 
+		modalidadeRepository.saveAll(Arrays.asList(modStd, modLat));
+
+		estiloRepository.saveAll(Arrays.asList(std1, std2, std3, std4, std5));
+		
+		estiloRepository.saveAll(Arrays.asList(lat1, lat2, lat3, lat4, lat5));
+		
+		
+		// -------------------------------
 		// DANÇA DE SALÃO
-		
+		// -------------------------------
+				
+		// Cria os Estilos
 		Estilo sal1 = new Estilo( null, "Bachata");	
 		Estilo sal2 = new Estilo( null, "Bolero");
 		Estilo sal3 = new Estilo( null, "Forró");
@@ -88,29 +122,38 @@ public class EventosApplication implements CommandLineRunner {
 		Estilo sal8 = new Estilo( null, "Tango");
 		Estilo sal9 = new Estilo( null, "Zouk");	
 		
-		Modalidade sal = new Modalidade( null, "Dança de Salão");
-		sal.getEstilo().addAll(Arrays.asList(sal1, sal2, sal3, sal4, sal5, 
-											 sal6, sal7, sal8, sal9));
-
-		sal1.getModalidades().addAll(Arrays.asList(sal));
-		sal2.getModalidades().addAll(Arrays.asList(sal));
-		sal3.getModalidades().addAll(Arrays.asList(sal));
-		sal4.getModalidades().addAll(Arrays.asList(sal));
-		sal5.getModalidades().addAll(Arrays.asList(sal));
-		sal6.getModalidades().addAll(Arrays.asList(sal));
-		sal7.getModalidades().addAll(Arrays.asList(sal));
-		sal8.getModalidades().addAll(Arrays.asList(sal));
-		sal9.getModalidades().addAll(Arrays.asList(sal));
+		// Cria a Modalidade
+		Modalidade modSal = new Modalidade( null, "Dança de Salão");
 
 		
-		modalidadeRepository.saveAll(Arrays.asList(std, lat, sal));
+		// ASSOCIAÇÕES Modalidades e Estilos - Dança de Salão
+		
+		// Insere os estilos na modalidade 
+		modSal.getEstilo().addAll(Arrays.asList(sal1, sal2, sal3, sal4, sal5, sal6, sal7, sal8, sal9));
 
-		estiloRepository.saveAll(Arrays.asList(std1, std2, std3, std4, std5));
-		estiloRepository.saveAll(Arrays.asList(lat1, lat2, lat3, lat4, lat5));
+		// Insere a modalidade nos estilos
+		sal1.getModalidades().addAll(Arrays.asList(modSal));
+		sal2.getModalidades().addAll(Arrays.asList(modSal));
+		sal3.getModalidades().addAll(Arrays.asList(modSal));
+		sal4.getModalidades().addAll(Arrays.asList(modSal));
+		sal5.getModalidades().addAll(Arrays.asList(modSal));
+		sal6.getModalidades().addAll(Arrays.asList(modSal));
+		sal7.getModalidades().addAll(Arrays.asList(modSal));
+		sal8.getModalidades().addAll(Arrays.asList(modSal));
+		sal9.getModalidades().addAll(Arrays.asList(modSal));
+
+		// Salva 
+		modalidadeRepository.saveAll(Arrays.asList(modSal));
+
 		estiloRepository.saveAll(Arrays.asList(sal1, sal2, sal3, sal4, sal5));
 		estiloRepository.saveAll(Arrays.asList(sal6, sal7, sal8, sal9));
-
 		
+
+		// ############################################################################
+		//
+		//  TIPOS DE PARTICIPANTES
+		//
+				
 		TipoParticipante tp1 = new TipoParticipante(null, "Casal", 2, 2);
 		TipoParticipante tp2 = new TipoParticipante(null, "Solo", 2, 2);
 		TipoParticipante tp3 = new TipoParticipante(null, "Grupo Coreográfico Pequeno", 3, 7);
@@ -140,6 +183,25 @@ public class EventosApplication implements CommandLineRunner {
 		faixaEtariaRepository.saveAll(Arrays.asList(fe1, fe2, fe3, fe4, fe5, fe6, fe7, fe8, 
 													fe9, fe10, fe11, fe12, fe13, fe14, fe15, fe16));
 		
+		// ############################################################################
+		//
+		//  PESSOAS
+		//
+
+		//Pessoa p1 = new Pessoa(null, "Michel Rosenblat", TipoDocumento.CPF, "09283639880",   )
+				
+		Pessoa p1 = new Pessoa(null, "Michel Rosenblat", "09283639880", TipoDocumento.CPF, TipoPessoa.PESSOAFISICA, "994313232", "michelrosenblat@gmail.com");
+
+		Endereco e1 = new Endereco(null,  "Rua Conselheiro Furtado", "1003", "Sala 02", "Liberdade", "São Paulo", "SP", "Brasil", "01003001", p1);
+		Endereco e2 = new Endereco(null,  "Rua Osaka", "113", null, "Jardim Japão", "São Paulo", "SP", "Brasil", "01003001", p1);
+		
+		
+		p1.getEnderecos().add(e1);
+		p1.getEnderecos().add(e2);
+
+		pessoaRepository.saveAll(Arrays.asList(p1));
+		enderecoRepository.saveAll(Arrays.asList(e1, e2));
+
 	}
 
 }
