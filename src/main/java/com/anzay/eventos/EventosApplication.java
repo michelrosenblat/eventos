@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.anzay.eventos.domain.Classe;
+import com.anzay.eventos.domain.Competidor;
 import com.anzay.eventos.domain.Endereco;
 import com.anzay.eventos.domain.Estilo;
 import com.anzay.eventos.domain.FaixaEtaria;
@@ -16,7 +17,9 @@ import com.anzay.eventos.domain.Pessoa;
 import com.anzay.eventos.domain.TipoParticipante;
 import com.anzay.eventos.domain.enums.TipoDocumento;
 import com.anzay.eventos.domain.enums.TipoPessoa;
+import com.anzay.eventos.repositories.ArbitroRepository;
 import com.anzay.eventos.repositories.ClasseRepository;
+import com.anzay.eventos.repositories.CompetidorRepository;
 import com.anzay.eventos.repositories.EnderecoRepository;
 import com.anzay.eventos.repositories.EstiloRepository;
 import com.anzay.eventos.repositories.FaixaEtariaRepository;
@@ -27,8 +30,17 @@ import com.anzay.eventos.repositories.TipoParticipanteRepository;
 @SpringBootApplication
 public class EventosApplication implements CommandLineRunner {
 
+//	@Autowired
+//	private ArbitroRepository arbitroRepository;
+	
 	@Autowired
-	private ModalidadeRepository modalidadeRepository;
+	private ClasseRepository classeRepository;
+	
+	@Autowired
+	private CompetidorRepository competidorRepository;
+	
+	@Autowired
+	private EnderecoRepository enderecoRepository;
 	
 	@Autowired
 	private EstiloRepository estiloRepository;
@@ -37,16 +49,13 @@ public class EventosApplication implements CommandLineRunner {
 	private FaixaEtariaRepository faixaEtariaRepository;
 	
 	@Autowired
-	private TipoParticipanteRepository tipoParticipanteRepository;
+	private ModalidadeRepository modalidadeRepository;
 	
 	@Autowired
 	private PessoaRepository pessoaRepository;
 	
 	@Autowired
-	private EnderecoRepository enderecoRepository;
-	
-	@Autowired
-	private ClasseRepository classeRepository;
+	private TipoParticipanteRepository tipoParticipanteRepository;
 	
 		
 	
@@ -103,8 +112,8 @@ public class EventosApplication implements CommandLineRunner {
 		// ASSOCIAÇÕES Modalidades e Estilos - Standard e Latin
 
 		// Insere Estilos nas Modalidades
-		modStd.getEstilo().addAll(Arrays.asList(std1, std2, std3, std4, std5));
-		modLat.getEstilo().addAll(Arrays.asList(lat1, lat2, lat3, lat4, lat5));
+		modStd.getEstilos().addAll(Arrays.asList(std1, std2, std3, std4, std5));
+		modLat.getEstilos().addAll(Arrays.asList(lat1, lat2, lat3, lat4, lat5));
 		
 		// Insere as Modalidades nos Estilos
 		std1.getModalidades().addAll(Arrays.asList( modStd ));
@@ -121,8 +130,8 @@ public class EventosApplication implements CommandLineRunner {
 		// ASSOCIAÇÕES Modalidades e Classes
 
 		// Insere Classes nas Modalidades
-		modStd.getClasse().addAll(Arrays.asList(cls1, cls2, cls3, cls4, cls5, cls6));
-		modLat.getClasse().addAll(Arrays.asList(cls7, cls8, cls9, cls10, cls11, cls12));
+		modStd.getClasses().addAll(Arrays.asList(cls1, cls2, cls3, cls4, cls5, cls6));
+		modLat.getClasses().addAll(Arrays.asList(cls7, cls8, cls9, cls10, cls11, cls12));
 		
 		// Insere as Modalidades nas Classes
 		cls1.getModalidades().addAll(Arrays.asList( modStd ));
@@ -170,7 +179,7 @@ public class EventosApplication implements CommandLineRunner {
 		// ASSOCIAÇÕES Modalidades e Estilos - Dança de Salão
 		
 		// Insere os estilos na modalidade 
-		modSal.getEstilo().addAll(Arrays.asList(sal1, sal2, sal3, sal4, sal5, sal6, sal7, sal8, sal9));
+		modSal.getEstilos().addAll(Arrays.asList(sal1, sal2, sal3, sal4, sal5, sal6, sal7, sal8, sal9));
 
 		// Insere a modalidade nos estilos
 		sal1.getModalidades().addAll(Arrays.asList(modSal));
@@ -243,6 +252,27 @@ public class EventosApplication implements CommandLineRunner {
 		pessoaRepository.saveAll(Arrays.asList(p1));
 		enderecoRepository.saveAll(Arrays.asList(e1, e2));
 
+		// ############################################################################
+		//
+		//	COMPETIDORES
+		//
+		
+		// -------------------------------
+		// DANÇA ESPORTIVA
+		// -------------------------------
+/*
+		Competidor comp1 = new Competidor(null, "Michel Rosenblat", "09283639880", TipoDocumento.CPF, TipoPessoa.PESSOAFISICA, "994313232", "michelrosenblat@gmail.com");
+		Competidor comp2 = new Competidor(null, "Maricelia Mendonça", "090514000-07", TipoDocumento.CPF, TipoPessoa.PESSOAFISICA, "912341234", "mariceliamendonca@gmail.com");
+
+		Endereco endComp1 = new Endereco(null, "Rua do Comp 1", "100", "Ap 01", "Centro", "Campinas", "SP", "Brasil", "01000-001", comp1);
+		Endereco endComp2 = new Endereco(null, "Rua do Comp 2", "200", null, "Centro", "Jundiaí", "SP", "Brasil", "18000-001", comp2);
+		
+		comp1.getEnderecos().add(endComp1);
+		comp2.getEnderecos().add(endComp2);
+
+		competidorRepository.saveAll(Arrays.asList(comp1, comp2));
+		enderecoRepository.saveAll(Arrays.asList(endComp1, endComp2));
+*/
 	}
 
 }

@@ -24,6 +24,7 @@ public class Classe implements Serializable {
 	private Integer id;
 	private String nome;
 
+	// join com MODALIDADE
 	@JsonBackReference
 	@ManyToMany
 	@JoinTable(

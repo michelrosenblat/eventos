@@ -22,13 +22,25 @@ public class Modalidade implements Serializable {
 	private Integer id;
 	private String nome;
 
+	// join com ESTILOS
 	@JsonManagedReference
 	@ManyToMany(mappedBy = "modalidades")
 	private List<Estilo> estilos = new ArrayList<>();
 
+	// join com CLASSES
 	@JsonManagedReference
 	@ManyToMany(mappedBy = "modalidades")
 	private List<Classe> classes = new ArrayList<>();
+		
+	// join com COMPETIDORES
+	@JsonManagedReference
+	@ManyToMany(mappedBy = "modalidades")
+	private List<Competidor> competidores = new ArrayList<>();
+		
+	// join com ARBITROS
+	@JsonManagedReference
+	@ManyToMany(mappedBy = "modalidades")
+	private List<Arbitro> arbitros = new ArrayList<>();
 	
 	
 	
@@ -41,6 +53,9 @@ public class Modalidade implements Serializable {
 		this.nome = nome;
 	}
 
+
+	
+	
 	public Integer getId() {
 		return id;
 	}
@@ -57,24 +72,38 @@ public class Modalidade implements Serializable {
 		this.nome = nome;
 	}
 
-	public List<Estilo> getEstilo() {
+	public List<Estilo> getEstilos() {
 		return estilos;
 	}
 
-	public void setEstilo(List<Estilo> estilo) {
-		this.estilos = estilo;
+	public void setEstilos(List<Estilo> estilos) {
+		this.estilos = estilos;
 	}
 
-	public List<Classe> getClasse() {
+	public List<Classe> getClasses() {
 		return classes;
 	}
 
-	public void setClasse(List<Classe> classe) {
-		this.classes = classe;
+	public void setClasses(List<Classe> classes) {
+		this.classes = classes;
 	}
 
+	public List<Competidor> getCompetidores() {
+		return competidores;
+	}
 
-	
+	public void setCompetidores(List<Competidor> competidores) {
+		this.competidores = competidores;
+	}
+
+	public List<Arbitro> getArbitros() {
+		return arbitros;
+	}
+
+	public void setArbitros(List<Arbitro> arbitros) {
+		this.arbitros = arbitros;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
