@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import com.anzay.eventos.domain.enums.Sexo;
 import com.anzay.eventos.domain.enums.TipoDocumento;
 import com.anzay.eventos.domain.enums.TipoPessoa;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Pessoa implements Serializable {
@@ -30,6 +31,7 @@ public class Pessoa implements Serializable {
 	private String telefonePrincipal;
 	private String emailPrincipal;
 
+	@JsonManagedReference
 	@OneToMany(mappedBy="pessoa")
 	private List<Endereco> enderecos = new ArrayList<>();
 	
