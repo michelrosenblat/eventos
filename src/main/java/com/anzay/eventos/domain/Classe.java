@@ -29,7 +29,7 @@ public class Classe implements Serializable {
 	//@JsonBackReference
 	@ManyToMany
 	@JoinTable(
-			name = "CLASSES_DA_MODALIDE",
+			name = "CLASSES_DA_MODALIDADE",
 			joinColumns = @JoinColumn(name = "classe_id"),
 			inverseJoinColumns = @JoinColumn(name = "modalidade_id")
 	)

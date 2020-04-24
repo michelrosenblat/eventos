@@ -14,6 +14,7 @@ import com.anzay.eventos.domain.Dancarino;
 import com.anzay.eventos.domain.Endereco;
 import com.anzay.eventos.domain.Estilo;
 import com.anzay.eventos.domain.FaixaEtaria;
+import com.anzay.eventos.domain.Formato;
 import com.anzay.eventos.domain.Modalidade;
 import com.anzay.eventos.domain.Pessoa;
 import com.anzay.eventos.domain.TipoParticipante;
@@ -27,6 +28,7 @@ import com.anzay.eventos.repositories.DancarinoRepository;
 import com.anzay.eventos.repositories.EnderecoRepository;
 import com.anzay.eventos.repositories.EstiloRepository;
 import com.anzay.eventos.repositories.FaixaEtariaRepository;
+import com.anzay.eventos.repositories.FormatoRepository;
 import com.anzay.eventos.repositories.ModalidadeRepository;
 import com.anzay.eventos.repositories.PessoaRepository;
 import com.anzay.eventos.repositories.TipoParticipanteRepository;
@@ -51,6 +53,9 @@ public class EventosApplication implements CommandLineRunner {
 	
 	@Autowired
 	private EstiloRepository estiloRepository;
+	
+	@Autowired
+	private FormatoRepository formatoRepository;
 	
 	@Autowired
 	private FaixaEtariaRepository faixaEtariaRepository;
@@ -123,8 +128,7 @@ public class EventosApplication implements CommandLineRunner {
 		// MODALIDADE, ESTILO, CLASSE, FAIXA ETÁRIA 
 		// ----------------------------------------------------------------------------
 		
-		
-		
+
 		// MODALIDADE
 		
 		Modalidade modStd = new Modalidade( null, "Standard");
@@ -274,9 +278,37 @@ public class EventosApplication implements CommandLineRunner {
 		modStd.getCompetidores().addAll(Arrays.asList(comp1, comp2, comp3));
 		modLat.getCompetidores().addAll(Arrays.asList(comp1, comp2, comp3));
 		modSal.getCompetidores().addAll(Arrays.asList(comp3));
+
+
+		// ----------------------------------------------------------------------------
+		// PESSOA, DANÇARINO, COMPETIDOR, ÁRBITRO 
+		// ----------------------------------------------------------------------------
+
+		// FORMATO
+
+		Formato fmt1 = new Formato(null, "Casal Standard Classe F Adulto", modStd, tp1);
+
+		fmt1.getClasses().addAll(Arrays.asList(cls1));
+		cls1.getFormatos().addAll(Arrays.asList(fmt1));
+		
+		fmt1.getFaixaEtarias().addAll(Arrays.asList(fe7));
+		fe7.getFormatos().addAll(Arrays.asList(fmt1));
+		
+		fmt1.getEstilos().addAll(Arrays.asList(estSt1, estSt2, estSt3));
+		estSt1.getFormatos().addAll(Arrays.asList(fmt1));
+		estSt2.getFormatos().addAll(Arrays.asList(fmt1));
+		estSt3.getFormatos().addAll(Arrays.asList(fmt1));
 		
 		
+		// ----------------------------------------------------------------------------
+		// COMMIT 
+		// ----------------------------------------------------------------------------
+
 		modalidadeRepository.saveAll(Arrays.asList(modStd, modLat, modSal));
+
+		formatoRepository.saveAll(Arrays.asList(fmt1));
+
+		faixaEtariaRepository.saveAll(Arrays.asList(fe1, fe2, fe3, fe4, fe5, fe6, fe7, fe8, fe9, fe10, fe11, fe12, fe13, fe14, fe15, fe16));
 
 		estiloRepository.saveAll(Arrays.asList(estSt1, estSt2, estSt3, estSt4, estSt5,
 				estLt1, estLt2, estLt3, estLt4, estLt5,
@@ -288,75 +320,7 @@ public class EventosApplication implements CommandLineRunner {
 
 		competidorRepository.saveAll(Arrays.asList(comp1, comp2, comp3));
 		
-		/*
 		
-		// ############################################################################
-		//
-		//  TIPOS DE PARTICIPANTES
-		//
-				
-
-
-		
-
-*/
-		
-
-		
-		
-		// ############################################################################
-		//
-		//	MODALIDADES E ESTILOS
-		//
-		
-		// -------------------------------
-		// DANÇA ESPORTIVA
-		// -------------------------------
-
-/*
-
-
-		
-*/		
-		
-		
-		// ASSOCIAÇÕES Modalidades e Estilos - Standard e Latin
-
-/*		
-*/
-		
-		//estiloRepository.saveAll(Arrays.asList(sal1, sal2, sal3, sal4, sal5, sal6, sal7, sal8, sal9));
-		
-/*
- *
-		// -------------------------------
-		// DANÇA DE SALÃO
-		// -------------------------------
-				
-
-		
-		// ASSOCIAÇÕES Modalidades e Estilos - Dança de Salão
-		
-		// Insere os estilos na modalidade 
-		modSal.getEstilos().addAll(Arrays.asList(sal1, sal2, sal3, sal4, sal5, sal6, sal7, sal8, sal9));
-
-		// Insere a modalidade nos estilos
-		sal1.getModalidades().addAll(Arrays.asList(modSal));
-		sal2.getModalidades().addAll(Arrays.asList(modSal));
-		sal3.getModalidades().addAll(Arrays.asList(modSal));
-		sal4.getModalidades().addAll(Arrays.asList(modSal));
-		sal5.getModalidades().addAll(Arrays.asList(modSal));
-		sal6.getModalidades().addAll(Arrays.asList(modSal));
-		sal7.getModalidades().addAll(Arrays.asList(modSal));
-		sal8.getModalidades().addAll(Arrays.asList(modSal));
-		sal9.getModalidades().addAll(Arrays.asList(modSal));
-		
-
-		
-
-*/
-
-
 	}
 
 }

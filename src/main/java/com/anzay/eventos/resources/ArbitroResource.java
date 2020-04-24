@@ -11,7 +11,7 @@ import com.anzay.eventos.domain.Arbitro;
 import com.anzay.eventos.services.ArbitroService;
 
 @RestController
-@RequestMapping(value="/arbitros")
+@RequestMapping(value="/formatos")
 public class ArbitroResource {
 
 	@Autowired

@@ -29,7 +29,7 @@ public class Estilo implements Serializable {
 	//@JsonBackReference
 	@ManyToMany
 	@JoinTable(
-			name = "ESTILOS_DA_MODALIDE",
+			name = "ESTILOS_DA_MODALIDADE",
 			joinColumns = @JoinColumn(name = "estilo_id"),
 			inverseJoinColumns = @JoinColumn(name = "modalidade_id")
 	)

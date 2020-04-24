@@ -24,7 +24,7 @@ public class Competidor extends Dancarino{
 	//@JsonBackReference
 	@ManyToMany
 	@JoinTable(
-			name = "COMPETIDORES_DA_MODALIDE",
+			name = "COMPETIDORES_DA_MODALIDADE",
 			joinColumns = @JoinColumn(name = "competidor_id"),
 			inverseJoinColumns = @JoinColumn(name = "modalidade_id")
 	)

@@ -27,7 +27,7 @@ public class Arbitro extends Pessoa {
 	//@JsonBackReference
 	@ManyToMany
 	@JoinTable(
-			name = "ARBITROS_DA_MODALIDE",
+			name = "ARBITROS_DA_MODALIDADE",
 			joinColumns = @JoinColumn(name = "arbitro_id"),
 			inverseJoinColumns = @JoinColumn(name = "modalidade_id")
 	)

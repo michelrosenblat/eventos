@@ -53,6 +53,8 @@ public class Formato implements Serializable {
 	public Formato() {
 	}
 			
+
+
 	public Formato(Integer id, String nome, Modalidade modalidade, TipoParticipante tipoParticipante) {
 		super();
 		this.id = id;
@@ -60,6 +62,8 @@ public class Formato implements Serializable {
 		this.modalidade = modalidade;
 		this.tipoParticipante = tipoParticipante;
 	}
+
+
 
 	public Integer getId() {
 		return id;
