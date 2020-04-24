@@ -23,22 +23,22 @@ public class Modalidade implements Serializable {
 	private String nome;
 
 	// join com ESTILOS
-	@JsonManagedReference
+	//@JsonManagedReference
 	@ManyToMany(mappedBy = "modalidades")
 	private List<Estilo> estilos = new ArrayList<>();
 
 	// join com CLASSES
-	@JsonManagedReference
+	//@JsonManagedReference
 	@ManyToMany(mappedBy = "modalidades")
 	private List<Classe> classes = new ArrayList<>();
 		
 	// join com COMPETIDORES
-	@JsonManagedReference
+	//@JsonManagedReference
 	@ManyToMany(mappedBy = "modalidades")
 	private List<Competidor> competidores = new ArrayList<>();
 		
 	// join com ARBITROS
-	@JsonManagedReference
+	//@JsonManagedReference
 	@ManyToMany(mappedBy = "modalidades")
 	private List<Arbitro> arbitros = new ArrayList<>();
 	

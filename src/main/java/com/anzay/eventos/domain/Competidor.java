@@ -12,7 +12,7 @@ import javax.persistence.ManyToMany;
 import com.anzay.eventos.domain.enums.Sexo;
 import com.anzay.eventos.domain.enums.TipoDocumento;
 import com.anzay.eventos.domain.enums.TipoPessoa;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Competidor extends Dancarino{
@@ -20,7 +20,8 @@ public class Competidor extends Dancarino{
 	private static final long serialVersionUID = 1L;
 
 	// join com MODALIDADE
-	@JsonBackReference
+	@JsonIgnore
+	//@JsonBackReference
 	@ManyToMany
 	@JoinTable(
 			name = "COMPETIDORES_DA_MODALIDE",

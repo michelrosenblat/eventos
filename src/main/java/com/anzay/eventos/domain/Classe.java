@@ -12,7 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Classe implements Serializable {
@@ -25,7 +25,8 @@ public class Classe implements Serializable {
 	private String nome;
 
 	// join com MODALIDADE
-	@JsonBackReference
+	@JsonIgnore
+	//@JsonBackReference
 	@ManyToMany
 	@JoinTable(
 			name = "CLASSES_DA_MODALIDE",

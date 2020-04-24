@@ -31,7 +31,7 @@ public class Pessoa implements Serializable {
 	private String telefonePrincipal;
 	private String emailPrincipal;
 
-	@JsonManagedReference
+	//@JsonManagedReference
 	@OneToMany(mappedBy="pessoa")
 	private List<Endereco> enderecos = new ArrayList<>();
 	

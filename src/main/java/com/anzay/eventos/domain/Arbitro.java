@@ -11,7 +11,7 @@ import javax.persistence.ManyToMany;
 import com.anzay.eventos.domain.enums.Sexo;
 import com.anzay.eventos.domain.enums.TipoDocumento;
 import com.anzay.eventos.domain.enums.TipoPessoa;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Arbitro extends Pessoa {
@@ -23,7 +23,8 @@ public class Arbitro extends Pessoa {
 	
 
 	// join com MODALIDADE
-	@JsonBackReference
+	@JsonIgnore
+	//@JsonBackReference
 	@ManyToMany
 	@JoinTable(
 			name = "ARBITROS_DA_MODALIDE",
