@@ -2,6 +2,7 @@ package com.anzay.eventos.domain;
 
 import javax.persistence.Entity;
 
+import com.anzay.eventos.domain.enums.Sexo;
 import com.anzay.eventos.domain.enums.TipoDocumento;
 import com.anzay.eventos.domain.enums.TipoPessoa;
 
@@ -14,11 +15,10 @@ public class Dancarino extends Pessoa {
 		
 	}
 
-	public Dancarino(Integer id, String nome, String documento, TipoDocumento tipoDocumento, TipoPessoa tipoPessoa,
+	public Dancarino(Integer id, String nome, String documento, TipoDocumento tipoDocumento, TipoPessoa tipoPessoa, Sexo sexo,
 			String telefonePrincipal, String emailPrincipal) {
 
-		super(id, nome, documento, tipoDocumento, tipoPessoa, telefonePrincipal, emailPrincipal);
-
+		super(id, nome, documento, tipoDocumento, tipoPessoa, sexo, telefonePrincipal, emailPrincipal);
 
 	}
 	

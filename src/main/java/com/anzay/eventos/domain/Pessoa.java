@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.anzay.eventos.domain.enums.Sexo;
 import com.anzay.eventos.domain.enums.TipoDocumento;
 import com.anzay.eventos.domain.enums.TipoPessoa;
 
@@ -25,6 +26,7 @@ public class Pessoa implements Serializable {
 	private String documento;
 	private Integer tipoDocumento;
 	private Integer tipoPessoa;
+	private Integer sexo;
 	private String telefonePrincipal;
 	private String emailPrincipal;
 
@@ -36,7 +38,7 @@ public class Pessoa implements Serializable {
 	public Pessoa() {
 	}
 
-	public Pessoa(Integer id, String nome, String documento, TipoDocumento tipoDocumento, TipoPessoa tipoPessoa,
+	public Pessoa(Integer id, String nome, String documento, TipoDocumento tipoDocumento, TipoPessoa tipoPessoa, Sexo sexo,
 			String telefonePrincipal, String emailPrincipal) {
 		super();
 		this.id = id;
@@ -44,6 +46,7 @@ public class Pessoa implements Serializable {
 		this.documento = documento;
 		this.tipoDocumento = tipoDocumento.getCod();
 		this.tipoPessoa = tipoPessoa.getCod();
+		this.sexo = sexo.getCod();
 		this.telefonePrincipal = telefonePrincipal;
 		this.emailPrincipal = emailPrincipal;
 	}
@@ -86,6 +89,14 @@ public class Pessoa implements Serializable {
 
 	public void setTipoPessoa(Integer tipoPessoa) {
 		this.tipoPessoa = tipoPessoa;
+	}
+
+	public Integer getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(Integer sexo) {
+		this.sexo = sexo;
 	}
 
 	public String getTelefonePrincipal() {

@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.anzay.eventos.domain.enums.Sexo;
 import com.anzay.eventos.domain.enums.TipoDocumento;
 import com.anzay.eventos.domain.enums.TipoPessoa;
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -33,10 +34,10 @@ public class Competidor extends Dancarino{
 		
 	}
 
-	public Competidor(Integer id, String nome, String documento, TipoDocumento tipoDocumento, TipoPessoa tipoPessoa,
+	public Competidor(Integer id, String nome, String documento, TipoDocumento tipoDocumento, TipoPessoa tipoPessoa, Sexo sexo,
 			String telefonePrincipal, String emailPrincipal) {
 		
-		super(id, nome, documento, tipoDocumento, tipoPessoa, telefonePrincipal, emailPrincipal);
+		super(id, nome, documento, tipoDocumento, tipoPessoa, sexo, telefonePrincipal, emailPrincipal);
 		
 	}
 

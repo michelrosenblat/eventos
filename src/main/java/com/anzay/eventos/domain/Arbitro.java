@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.anzay.eventos.domain.enums.Sexo;
 import com.anzay.eventos.domain.enums.TipoDocumento;
 import com.anzay.eventos.domain.enums.TipoPessoa;
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -36,10 +37,10 @@ public class Arbitro extends Pessoa {
 		
 	}
 
-	public Arbitro(Integer id, String nome, String documento, TipoDocumento tipoDocumento, TipoPessoa tipoPessoa,
+	public Arbitro(Integer id, String nome, String documento, TipoDocumento tipoDocumento, TipoPessoa tipoPessoa, Sexo sexo,
 			String telefonePrincipal, String emailPrincipal, String pin) {
 
-		super(id, nome, documento, tipoDocumento, tipoPessoa, telefonePrincipal, emailPrincipal);
+		super(id, nome, documento, tipoDocumento, tipoPessoa, sexo,  telefonePrincipal, emailPrincipal);
 		
 		this.pin = pin;
 
