@@ -1,11 +1,18 @@
 package com.anzay.eventos.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class FaixaEtaria implements Serializable {
@@ -19,11 +26,25 @@ public class FaixaEtaria implements Serializable {
 	private Integer idadeMin;
 	private Integer idadeMax;
 
-	public FaixaEtaria() {
+	// join com MODALIDADE
+	@JsonIgnore
+	//@JsonBackReference
+	@ManyToMany
+	@JoinTable(
+			name = "FAIXAETARIA_DO_FORMATO",
+			joinColumns = @JoinColumn(name = "faixaetaria_id"),
+			inverseJoinColumns = @JoinColumn(name = "formato_id")
+	)
+	private List<Formato> formatos = new ArrayList<>();
+	
+	
+		
+	
+public FaixaEtaria() {
 		
 	}
 
-	
+
 
 	public FaixaEtaria(Integer id, String nome, Integer idadeMin, Integer idadeMax) {
 		super();
@@ -39,8 +60,6 @@ public class FaixaEtaria implements Serializable {
 		return id;
 	}
 
-
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -50,8 +69,6 @@ public class FaixaEtaria implements Serializable {
 	public String getNome() {
 		return nome;
 	}
-
-
 
 	public void setNome(String nome) {
 		this.nome = nome;
@@ -63,8 +80,6 @@ public class FaixaEtaria implements Serializable {
 		return idadeMin;
 	}
 
-
-
 	public void setIdadeMin(Integer idadeMin) {
 		this.idadeMin = idadeMin;
 	}
@@ -75,13 +90,22 @@ public class FaixaEtaria implements Serializable {
 		return idadeMax;
 	}
 
-
-
 	public void setIdadeMax(Integer idadeMax) {
 		this.idadeMax = idadeMax;
 	}
 
+	
+	public List<Formato> getFormatos() {
+		return formatos;
+	}
 
+	public void setFormatos(List<Formato> formatos) {
+		this.formatos = formatos;
+	}
+
+
+
+	
 
 	@Override
 	public boolean equals(Object obj) {

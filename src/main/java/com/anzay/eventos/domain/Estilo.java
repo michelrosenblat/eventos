@@ -12,7 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -35,6 +34,19 @@ public class Estilo implements Serializable {
 			inverseJoinColumns = @JoinColumn(name = "modalidade_id")
 	)
 	private List<Modalidade> modalidades = new ArrayList<>();
+
+	// join com FORMATO
+	@JsonIgnore
+	//@JsonBackReference
+	@ManyToMany
+	@JoinTable(
+			name = "ESTILOS_DO_FORMATO",
+			joinColumns = @JoinColumn(name = "estilo_id"),
+			inverseJoinColumns = @JoinColumn(name = "formato_id")
+	)
+	private List<Formato> formatos = new ArrayList<>();
+
+	
 	
 	public Estilo() {
 	
@@ -68,6 +80,16 @@ public class Estilo implements Serializable {
 
 	public void setModalidades(List<Modalidade> modalidades) {
 		this.modalidades = modalidades;
+	}
+	
+	
+
+	public List<Formato> getFormatos() {
+		return formatos;
+	}
+
+	public void setFormatos(List<Formato> formatos) {
+		this.formatos = formatos;
 	}
 
 	@Override

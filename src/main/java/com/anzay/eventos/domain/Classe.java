@@ -35,6 +35,20 @@ public class Classe implements Serializable {
 	)
 	private List<Modalidade> modalidades = new ArrayList<>();
 	
+	// join com MODALIDADE
+	@JsonIgnore
+	//@JsonBackReference
+	@ManyToMany
+	@JoinTable(
+			name = "CLASSES_DO_FORMATO",
+			joinColumns = @JoinColumn(name = "classe_id"),
+			inverseJoinColumns = @JoinColumn(name = "formato_id")
+	)
+	private List<Formato> formatos = new ArrayList<>();
+	
+	
+	
+	
 	
 	public Classe() {
 		
@@ -68,6 +82,15 @@ public class Classe implements Serializable {
 
 	public void setModalidades(List<Modalidade> modalidades) {
 		this.modalidades = modalidades;
+	}
+	
+	
+	public List<Formato> getFormatos() {
+		return formatos;
+	}
+
+	public void setFormatos(List<Formato> formatos) {
+		this.formatos = formatos;
 	}
 
 		@Override

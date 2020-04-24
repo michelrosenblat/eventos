@@ -12,10 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity
-public class Modalidade implements Serializable {
+@Entity 
+public class Formato implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -24,46 +23,44 @@ public class Modalidade implements Serializable {
 	private Integer id;
 	private String nome;
 
-	// join com ESTILOS
-	//@JsonManagedReference
-	@ManyToMany(mappedBy = "modalidades")
-	private List<Estilo> estilos = new ArrayList<>();
+	// MODALIDADE
+	@ManyToOne
+	@JoinColumn(name="modalidade_id")
+	private Modalidade modalidade;
+	
+
+	// TIPO PARTICIPANTE
+	@ManyToOne
+	@JoinColumn(name="tipoParticipante_id")
+	private TipoParticipante tipoParticipante = new TipoParticipante(); 
 
 	// join com CLASSES
 	//@JsonManagedReference
-	@ManyToMany(mappedBy = "modalidades")
+	@ManyToMany(mappedBy = "formatos")
 	private List<Classe> classes = new ArrayList<>();
-		
-	// join com COMPETIDORES
+
+	// join com FAIXA ETÁRIA
 	//@JsonManagedReference
-	@ManyToMany(mappedBy = "modalidades")
-	private List<Competidor> competidores = new ArrayList<>();
-		
-	// join com ARBITROS
+	@ManyToMany(mappedBy = "formatos")
+	private List<FaixaEtaria> faixaEtarias = new ArrayList<>();
+
+	// join com ESTILOS
 	//@JsonManagedReference
-	@ManyToMany(mappedBy = "modalidades")
-	private List<Arbitro> arbitros = new ArrayList<>();
-	
-	// join com FORMATOS
-	@JsonIgnore
-	@ManyToOne
-	@JoinColumn(name="formato_id")
-	private Formato formato;
+	@ManyToMany(mappedBy = "formatos")
+	private List<Estilo> estilos = new ArrayList<>();
 
 	
-	
-	public Modalidade() {
+	public Formato() {
 	}
-
-	public Modalidade(Integer id, String nome) {
+			
+	public Formato(Integer id, String nome, Modalidade modalidade, TipoParticipante tipoParticipante) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.modalidade = modalidade;
+		this.tipoParticipante = tipoParticipante;
 	}
 
-
-	
-	
 	public Integer getId() {
 		return id;
 	}
@@ -80,13 +77,22 @@ public class Modalidade implements Serializable {
 		this.nome = nome;
 	}
 
-	public List<Estilo> getEstilos() {
-		return estilos;
+	public Modalidade getModalidade() {
+		return modalidade;
 	}
 
-	public void setEstilos(List<Estilo> estilos) {
-		this.estilos = estilos;
+	public void setModalidade(Modalidade modalidade) {
+		this.modalidade = modalidade;
 	}
+
+	public TipoParticipante getTipoParticipante() {
+		return tipoParticipante;
+	}
+
+	public void setTipoParticipante(TipoParticipante tipoParticipante) {
+		this.tipoParticipante = tipoParticipante;
+	}
+
 
 	public List<Classe> getClasses() {
 		return classes;
@@ -96,20 +102,20 @@ public class Modalidade implements Serializable {
 		this.classes = classes;
 	}
 
-	public List<Competidor> getCompetidores() {
-		return competidores;
+	public List<Estilo> getEstilos() {
+		return estilos;
 	}
 
-	public void setCompetidores(List<Competidor> competidores) {
-		this.competidores = competidores;
+	public void setEstilos(List<Estilo> estilos) {
+		this.estilos = estilos;
 	}
 
-	public List<Arbitro> getArbitros() {
-		return arbitros;
+	public List<FaixaEtaria> getFaixaEtarias() {
+		return faixaEtarias;
 	}
 
-	public void setArbitros(List<Arbitro> arbitros) {
-		this.arbitros = arbitros;
+	public void setFaixaEtarias(List<FaixaEtaria> faixaEtarias) {
+		this.faixaEtarias = faixaEtarias;
 	}
 
 	@Override
@@ -128,13 +134,15 @@ public class Modalidade implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Modalidade other = (Modalidade) obj;
+		Formato other = (Formato) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
-	
+	} 
+
+
+
 }
