@@ -11,7 +11,7 @@ import com.anzay.eventos.domain.Arbitro;
 import com.anzay.eventos.services.ArbitroService;
 
 @RestController
-@RequestMapping(value="/formatos")
+@RequestMapping(value="/arbitros")
 public class ArbitroResource {
 
 	@Autowired
@@ -20,7 +20,7 @@ public class ArbitroResource {
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 
-		Arbitro obj = service.buscar(id);
+		Arbitro obj = service.find(id);
 		
 		return ResponseEntity.ok().body(obj);
 		

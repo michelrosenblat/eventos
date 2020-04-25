@@ -20,7 +20,7 @@ public class CompetidorResource {
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 
-		Competidor obj = service.buscar(id);
+		Competidor obj = service.find(id);
 		
 		return ResponseEntity.ok().body(obj);
 		

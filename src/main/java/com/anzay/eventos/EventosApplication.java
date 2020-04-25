@@ -33,9 +33,11 @@ import com.anzay.eventos.repositories.ModalidadeRepository;
 import com.anzay.eventos.repositories.PessoaRepository;
 import com.anzay.eventos.repositories.TipoParticipanteRepository;
 
+
 @SpringBootApplication
 public class EventosApplication implements CommandLineRunner {
 
+	
 	@Autowired
 	private ArbitroRepository arbitroRepository;
 	

@@ -16,7 +16,7 @@ public class ModalidadeService {
 	@Autowired
 	private ModalidadeRepository repo;
 	
-	public Modalidade buscar(Integer id) {
+	public Modalidade find(Integer id) {
 		
 		Optional<Modalidade> obj = repo.findById(id);
 		

@@ -16,7 +16,7 @@ public class ArbitroService {
 	@Autowired
 	private ArbitroRepository repo;
 	
-	public Arbitro buscar(Integer id) {
+	public Arbitro find(Integer id) {
 		
 		Optional<Arbitro> obj = repo.findById(id);
 		

@@ -16,20 +16,20 @@ public class TipoParticipante implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	private Integer minParticipantes;
-	private Integer maxParticipantes;
+	private Integer minCompedidores;
+	private Integer maxCompedidores;
 	
 	public TipoParticipante() {
 		
 	}
 
 	
-	public TipoParticipante(Integer id, String nome, Integer minParticipantes, Integer maxParticipantes) {
+	public TipoParticipante(Integer id, String nome, Integer minCompedidores, Integer maxCompedidores) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.minParticipantes = minParticipantes;
-		this.maxParticipantes = maxParticipantes;
+		this.minCompedidores = minCompedidores;
+		this.maxCompedidores = maxCompedidores;
 	}
 
 
@@ -53,19 +53,19 @@ public class TipoParticipante implements Serializable {
 	}
 
 	public Integer getMinParticipantes() {
-		return minParticipantes;
+		return minCompedidores;
 	}
 
-	public void setMinParticipantes(Integer minParticipantes) {
-		this.minParticipantes = minParticipantes;
+	public void setMinParticipantes(Integer minCompedidores) {
+		this.minCompedidores = minCompedidores;
 	}
 
 	public Integer getMaxParticipantes() {
-		return maxParticipantes;
+		return maxCompedidores;
 	}
 
-	public void setMaxParticipantes(Integer maxParticipantes) {
-		this.maxParticipantes = maxParticipantes;
+	public void setMaxParticipantes(Integer maxCompedidores) {
+		this.maxCompedidores = maxCompedidores;
 	}
 
 	@Override

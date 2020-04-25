@@ -7,20 +7,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.anzay.eventos.domain.Modalidade;
-import com.anzay.eventos.services.ModalidadeService;
+import com.anzay.eventos.domain.Formato;
+import com.anzay.eventos.services.FormatoService;
 
 @RestController
-@RequestMapping(value="/modalidades")
-public class ModalidadeResource {
+@RequestMapping(value="/formatos")
+public class FormatoResource {
 
 	@Autowired
-	private ModalidadeService service;
+	private FormatoService service;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 
-		Modalidade obj = service.find(id);
+		Formato obj = service.find(id);
 		
 		return ResponseEntity.ok().body(obj);
 		
