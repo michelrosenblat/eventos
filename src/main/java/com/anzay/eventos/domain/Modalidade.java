@@ -8,9 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -43,14 +42,21 @@ public class Modalidade implements Serializable {
 	//@JsonManagedReference
 	@ManyToMany(mappedBy = "modalidades")
 	private List<Arbitro> arbitros = new ArrayList<>();
-	
+
+/*	
 	// join com FORMATOS
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="formato_id")
 	private Formato formato;
+*/
 
-	
+	// join com ARBITROS
+	//@JsonManagedReference
+	@JsonIgnore
+	@OneToMany(mappedBy = "modalidade")
+	private List<Formato> formatos;
+
 	
 	public Modalidade() {
 	}
@@ -110,6 +116,15 @@ public class Modalidade implements Serializable {
 
 	public void setArbitros(List<Arbitro> arbitros) {
 		this.arbitros = arbitros;
+	}
+
+	
+	public List<Formato> getFormatos() {
+		return formatos;
+	}
+
+	public void setFormatos(List<Formato> formatos) {
+		this.formatos = formatos;
 	}
 
 	@Override

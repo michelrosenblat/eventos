@@ -1,15 +1,46 @@
-SELECT * FROM ARBITROS_DA_MODALIDADE;
-SELECT * FROM CLASSE;
-SELECT * FROM CLASSES_DA_MODALIDADE;
-SELECT * FROM CLASSES_DO_FORMATO;
-SELECT * FROM COMPETIDORES_DA_MODALIDADE;
-SELECT * FROM ENDERECO;
-SELECT * FROM ESTILO;
-SELECT * FROM ESTILOS_DA_MODALIDADE;
-SELECT * FROM ESTILOS_DO_FORMATO;
-SELECT * FROM FAIXAETARIA_DO_FORMATO;
-SELECT * FROM FAIXA_ETARIA;
-SELECT * FROM FORMATO;
-SELECT * FROM MODALIDADE;
-SELECT * FROM PESSOA;
-SELECT * FROM TIPO_PARTICIPANTE;
+
+
+select * from ARBITROS_DA_MODALIDADE;
+select * from CLASSE;
+select * from CLASSES_DA_MODALIDADE;
+select * from CLASSES_DO_FORMATO;
+select * from COMPETIDORES_DA_MODALIDADE;
+select * from ENDERECO;
+select * from ESTILO;
+select * from ESTILOS_DA_MODALIDADE;
+select * from ESTILOS_DO_FORMATO;
+select * from FAIXAETARIA_DO_FORMATO;
+select * from FAIXA_ETARIA;
+select * from FORMATO;
+select * from MODALIDADE;
+select * from PESSOA;
+select * from TIPO_PARTICIPANTE;
+
+select form.id, mod.nome Modalidade, tpPart.nome TipoPartic, classe.nome Classes, faixaetaria.nome FaixaEtarias, est.nome Estilos
+    from
+        FORMATO form
+    left outer join
+        MODALIDADE mod
+            on mod.id = form.modalidade_id
+    left outer join
+        TIPO_PARTICIPANTE tpPart
+            on tpPart.id  = form.tipo_participante_id
+    left outer join
+        CLASSES_DO_FORMATO formClasse
+            on formClasse.formato_id  = form.id
+    left outer join
+        CLASSE classe
+            on formClasse.classe_id = classe.id
+    left outer join
+        FAIXAETARIA_DO_FORMATO formFaixaEtaria
+            on formFaixaEtaria.formato_id = form.id
+    left outer join
+        FAIXA_ETARIA faixaetaria
+            on faixaetaria.id = formFaixaEtaria.faixaetaria_id
+    left outer join
+        ESTILOS_DO_FORMATO formEstilos
+            on formEstilos.formato_id = form.id
+    left outer join
+        ESTILO est
+            on est.id = formEstilos.estilo_id;
+            

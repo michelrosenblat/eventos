@@ -283,23 +283,51 @@ public class EventosApplication implements CommandLineRunner {
 
 
 		// ----------------------------------------------------------------------------
-		// PESSOA, DANÇARINO, COMPETIDOR, ÁRBITRO 
+		// FORMATO
 		// ----------------------------------------------------------------------------
 
-		// FORMATO
+		// ------------------------------------------------------------------------------------------
+		// FORMATO 1 - Standard
 
-		Formato fmt1 = new Formato(null, "Casal Standard Classe F Adulto", modStd, tp1);
+		Formato fmt1 = new Formato(null, "Casal Standard Classe F/E Adulto", modStd, tp1);
 
-		fmt1.getClasses().addAll(Arrays.asList(cls1));
-		cls1.getFormatos().addAll(Arrays.asList(fmt1));
-		
+		// CLASSES
+		fmt1.getClasses().addAll(Arrays.asList(cls5, cls6));
+		cls5.getFormatos().addAll(Arrays.asList(fmt1));
+		cls6.getFormatos().addAll(Arrays.asList(fmt1));
+
+		// FAIXA ETÁRIA
 		fmt1.getFaixaEtarias().addAll(Arrays.asList(fe7));
 		fe7.getFormatos().addAll(Arrays.asList(fmt1));
 		
+		// ESTILOS
 		fmt1.getEstilos().addAll(Arrays.asList(estSt1, estSt2, estSt3));
 		estSt1.getFormatos().addAll(Arrays.asList(fmt1));
 		estSt2.getFormatos().addAll(Arrays.asList(fmt1));
 		estSt3.getFormatos().addAll(Arrays.asList(fmt1));
+
+		
+		
+		// ------------------------------------------------------------------------------------------
+		// FORMATO 2 - Latin
+
+		Formato fmt2 = new Formato(null, "Casal Latin Classe F Adulto", modLat, tp1);
+
+		// CLASSES
+		fmt2.getClasses().addAll(Arrays.asList(cls5, cls6));
+		cls5.getFormatos().addAll(Arrays.asList(fmt2));
+		cls6.getFormatos().addAll(Arrays.asList(fmt2));
+
+		// FAIXA ETÁRIA
+		fmt2.getFaixaEtarias().addAll(Arrays.asList(fe7));
+		fe7.getFormatos().addAll(Arrays.asList(fmt2));
+
+
+		// ESTILOS
+		fmt2.getEstilos().addAll(Arrays.asList(estLt1, estLt2, estLt3));
+		estLt1.getFormatos().addAll(Arrays.asList(fmt2));
+		estLt2.getFormatos().addAll(Arrays.asList(fmt2));
+		estLt3.getFormatos().addAll(Arrays.asList(fmt2));
 		
 		
 		// ----------------------------------------------------------------------------
@@ -308,7 +336,7 @@ public class EventosApplication implements CommandLineRunner {
 
 		modalidadeRepository.saveAll(Arrays.asList(modStd, modLat, modSal));
 
-		formatoRepository.saveAll(Arrays.asList(fmt1));
+		formatoRepository.saveAll(Arrays.asList(fmt1, fmt2));
 
 		faixaEtariaRepository.saveAll(Arrays.asList(fe1, fe2, fe3, fe4, fe5, fe6, fe7, fe8, fe9, fe10, fe11, fe12, fe13, fe14, fe15, fe16));
 
