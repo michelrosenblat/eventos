@@ -1,8 +1,8 @@
 package com.anzay.eventos.domain;
 
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -21,15 +21,25 @@ public class Competidor extends Dancarino{
 
 	// join com MODALIDADE
 	@JsonIgnore
-	//@JsonBackReference
 	@ManyToMany
 	@JoinTable(
 			name = "COMPETIDORES_DA_MODALIDADE",
 			joinColumns = @JoinColumn(name = "competidor_id"),
 			inverseJoinColumns = @JoinColumn(name = "modalidade_id")
 	)
-	private List<Modalidade> modalidades = new ArrayList<>();
+	private Set<Modalidade> modalidades = new HashSet<>();
 
+	// join com MODALIDADE
+	@JsonIgnore
+	@ManyToMany
+	@JoinTable(
+			name = "COMPETIDORES_DA_INSCRICAO",
+			joinColumns = @JoinColumn(name = "competidor_id"),
+			inverseJoinColumns = @JoinColumn(name = "inscricaoCompetidor_id")
+	)
+	private Set<InscricaoCompeticao> inscricoesCompetidor = new HashSet<>();
+
+		
 	
 	public Competidor() {
 		
@@ -42,13 +52,23 @@ public class Competidor extends Dancarino{
 		
 	}
 
-
-	public List<Modalidade> getModalidades() {
+	public Set<Modalidade> getModalidades() {
 		return modalidades;
 	}
 
-	public void setModalidades(List<Modalidade> modalidades) {
+	public void setModalidades(Set<Modalidade> modalidades) {
 		this.modalidades = modalidades;
 	}
 
+	public Set<InscricaoCompeticao> getInscricoes() {
+		return inscricoesCompetidor;
+	}
+
+	public void setInscricoes(Set<InscricaoCompeticao> inscricoes) {
+		this.inscricoesCompetidor = inscricoes;
+	}
+
+
+
+	
 }

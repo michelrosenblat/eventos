@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.anzay.eventos.domain.Arbitro;
 import com.anzay.eventos.domain.Classe;
+import com.anzay.eventos.domain.Competicao;
 import com.anzay.eventos.domain.Competidor;
 import com.anzay.eventos.domain.Dancarino;
 import com.anzay.eventos.domain.Endereco;
@@ -23,6 +24,7 @@ import com.anzay.eventos.domain.enums.TipoDocumento;
 import com.anzay.eventos.domain.enums.TipoPessoa;
 import com.anzay.eventos.repositories.ArbitroRepository;
 import com.anzay.eventos.repositories.ClasseRepository;
+import com.anzay.eventos.repositories.CompeticaoRepository;
 import com.anzay.eventos.repositories.CompetidorRepository;
 import com.anzay.eventos.repositories.DancarinoRepository;
 import com.anzay.eventos.repositories.EnderecoRepository;
@@ -43,6 +45,9 @@ public class EventosApplication implements CommandLineRunner {
 	
 	@Autowired
 	private ClasseRepository classeRepository;
+	
+	@Autowired
+	private CompeticaoRepository competicaoRepository;
 	
 	@Autowired
 	private CompetidorRepository competidorRepository;
@@ -331,8 +336,28 @@ public class EventosApplication implements CommandLineRunner {
 		
 		
 		// ----------------------------------------------------------------------------
+		// COMPETICAO
+		// ----------------------------------------------------------------------------
+
+		// ------------------------------------------------------------------------------------------
+		// COMPTICAO 
+
+		Competicao fides2019 = new Competicao(null, "FIDES 2019");
+
+		fides2019.getFormatos().addAll(Arrays.asList(fmt1, fmt2));
+		fmt1.getCompeticoes().addAll(Arrays.asList(fides2019));
+		fmt2.getCompeticoes().addAll(Arrays.asList(fides2019));
+		
+		
+		// CLASSES
+		//comp1.get().addAll(Arrays.asList(fmt1));
+
+		
+		// ----------------------------------------------------------------------------
 		// COMMIT 
 		// ----------------------------------------------------------------------------
+
+		competicaoRepository.saveAll(Arrays.asList(fides2019));
 
 		modalidadeRepository.saveAll(Arrays.asList(modStd, modLat, modSal));
 

@@ -9,9 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity 
@@ -50,6 +52,16 @@ public class Formato implements Serializable {
 	@ManyToMany(mappedBy = "formatos")
 	private List<Estilo> estilos = new ArrayList<>();
 
+	// join com FORMATO
+	@JsonIgnore
+	@ManyToMany
+	@JoinTable(
+			name = "FORMATOS_DA_COMPETICAO",
+			joinColumns = @JoinColumn(name = "formato_id"),
+			inverseJoinColumns = @JoinColumn(name = "competicao_id")
+	)
+	private List<Competicao> competicoes = new ArrayList<>();
+	
 	
 	public Formato() {
 	}
@@ -122,6 +134,17 @@ public class Formato implements Serializable {
 	public void setFaixaEtarias(List<FaixaEtaria> faixaEtarias) {
 		this.faixaEtarias = faixaEtarias;
 	}
+
+	
+	public List<Competicao> getCompeticoes() {
+		return competicoes;
+	}
+
+	public void setCompeticoes(List<Competicao> competicoes) {
+		this.competicoes = competicoes;
+	}
+
+
 
 	@Override
 	public int hashCode() {

@@ -16,6 +16,48 @@ select * from MODALIDADE;
 select * from PESSOA;
 select * from TIPO_PARTICIPANTE;
 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SQL - Todas competições
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+select comp.nome, form.id, form.nome, mod.nome Modalidade, tpPart.nome TipoPartic, classe.nome Classes, faixaetaria.nome FaixaEtarias, est.nome Estilos
+    from
+        COMPETICAO comp
+    left outer join
+        FORMATOS_DA_COMPETICAO formComp
+            on formComp.competicao_id = comp.id
+    left outer join
+        FORMATO form
+            on form.id = formComp.formato_id
+    left outer join
+        MODALIDADE mod
+            on mod.id = form.modalidade_id
+    left outer join
+        TIPO_PARTICIPANTE tpPart
+            on tpPart.id  = form.tipo_participante_id
+    left outer join
+        CLASSES_DO_FORMATO formClasse
+            on formClasse.formato_id  = form.id
+    left outer join
+        CLASSE classe
+            on formClasse.classe_id = classe.id
+    left outer join
+        FAIXAETARIA_DO_FORMATO formFaixaEtaria
+            on formFaixaEtaria.formato_id = form.id
+    left outer join
+        FAIXA_ETARIA faixaetaria
+            on faixaetaria.id = formFaixaEtaria.faixaetaria_id
+    left outer join
+        ESTILOS_DO_FORMATO formEstilos
+            on formEstilos.formato_id = form.id
+    left outer join
+        ESTILO est
+            on est.id = formEstilos.estilo_id;
+            
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SQL - Todos formatos
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 select form.id, mod.nome Modalidade, tpPart.nome TipoPartic, classe.nome Classes, faixaetaria.nome FaixaEtarias, est.nome Estilos
     from
         FORMATO form
