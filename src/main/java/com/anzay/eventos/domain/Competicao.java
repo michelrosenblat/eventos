@@ -2,9 +2,7 @@ package com.anzay.eventos.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,8 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Competicao  implements Serializable {
@@ -31,6 +27,16 @@ public class Competicao  implements Serializable {
 	private List<Formato> formatos = new ArrayList<>();
 
 
+
+	// join com INSCRICAO_COMPETICAO
+	@ManyToMany
+	@JoinTable(
+			name = "INSCRICOES_DA_COMPETICAO",
+			joinColumns = @JoinColumn(name = "competicao_id"),
+			inverseJoinColumns = @JoinColumn(name = "inscricaoCompeticao_id")
+	)
+	private List<InscricaoCompeticao> inscricoesCompeticao = new ArrayList<>();
+	
 	
 	
 	public Competicao() {
@@ -43,6 +49,8 @@ public class Competicao  implements Serializable {
 		this.id = id;
 		this.nome = nome;
 	}
+
+
 
 
 	public Integer getId() {
@@ -64,7 +72,6 @@ public class Competicao  implements Serializable {
 		this.nome = nome;
 	}
 
-	
 
 	public List<Formato> getFormatos() {
 		return formatos;
@@ -73,6 +80,16 @@ public class Competicao  implements Serializable {
 
 	public void setFormatos(List<Formato> formatos) {
 		this.formatos = formatos;
+	}
+
+
+	public List<InscricaoCompeticao> getCompetices() {
+		return inscricoesCompeticao;
+	}
+
+
+	public void setCompetices(List<InscricaoCompeticao> inscricoesCompeticao) {
+		this.inscricoesCompeticao = inscricoesCompeticao;
 	}
 
 

@@ -1,8 +1,10 @@
 package com.anzay.eventos.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -12,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class InscricaoCompeticao implements Serializable {
@@ -32,7 +36,12 @@ public class InscricaoCompeticao implements Serializable {
 	private Set<Competidor> competidores = new HashSet<>();
 			
 	
-
+	// join com COMPETIÇÕES
+	@JsonIgnore
+	@ManyToMany(mappedBy = "inscricoesCompeticao")
+	private List<Competicao> competicoes = new ArrayList<>();
+			
+	
 	public InscricaoCompeticao() {
 		
 	}
@@ -44,6 +53,8 @@ public class InscricaoCompeticao implements Serializable {
 		this.competidorLeader = competidorLeader;
 	}
 
+	
+	
 	public Integer getId() {
 		return id;
 	}
@@ -76,7 +87,14 @@ public class InscricaoCompeticao implements Serializable {
 		this.competidores = competidores;
 	}
 
-	
+	public List<Competicao> getInscricoesCompeticao() {
+		return competicoes;
+	}
+
+	public void setInscricoesCompeticao(List<Competicao> competicoes) {
+		this.competicoes = competicoes;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
