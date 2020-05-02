@@ -1,8 +1,8 @@
 package com.anzay.eventos.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,7 +32,7 @@ public class Pessoa implements Serializable {
 
 	//@JsonManagedReference
 	@OneToMany(mappedBy="pessoa")
-	private List<Endereco> enderecos = new ArrayList<>();
+	private Set<Endereco> enderecos = new HashSet<>();
 	
 	//private Set<String> telefones = new HashSet();
 	
@@ -116,11 +116,11 @@ public class Pessoa implements Serializable {
 		this.emailPrincipal = emailPrincipal;
 	}
 
-	public List<Endereco> getEnderecos() {
+	public Set<Endereco> getEnderecos() {
 		return enderecos;
 	}
 
-	public void setEnderecos(List<Endereco> enderecos) {
+	public void setEnderecos(Set<Endereco> enderecos) {
 		this.enderecos = enderecos;
 	}
 

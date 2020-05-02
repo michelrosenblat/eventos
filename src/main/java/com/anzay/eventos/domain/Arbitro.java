@@ -1,11 +1,9 @@
 package com.anzay.eventos.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 import com.anzay.eventos.domain.enums.Sexo;
@@ -20,19 +18,10 @@ public class Arbitro extends Pessoa {
 
 	private String pin;
 
-	
 
-	// join com MODALIDADE
-	@JsonIgnore
-	//@JsonBackReference
-	@ManyToMany
-	@JoinTable(
-			name = "ARBITROS_DA_MODALIDADE",
-			joinColumns = @JoinColumn(name = "arbitro_id"),
-			inverseJoinColumns = @JoinColumn(name = "modalidade_id")
-	)
-	private List<Modalidade> modalidades = new ArrayList<>();
-
+  	@JsonIgnore
+	@ManyToMany(mappedBy="arbitros")
+	private Set<Modalidade> modalidades = new HashSet<>();
 
 	public Arbitro() {
 		
@@ -47,13 +36,16 @@ public class Arbitro extends Pessoa {
 
 	}
 	
-	public List<Modalidade> getModalidades() {
+
+	
+	public Set<Modalidade> getModalidades() {
 		return modalidades;
 	}
 
-	public void setModalidades(List<Modalidade> modalidades) {
+	public void setModalidades(Set<Modalidade> modalidades) {
 		this.modalidades = modalidades;
 	}
+
 
 	public String getPin() {
 		return pin;

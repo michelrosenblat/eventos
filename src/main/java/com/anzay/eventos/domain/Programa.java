@@ -1,46 +1,40 @@
 package com.anzay.eventos.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.OneToMany;
 
 @Entity
-public class Classe implements Serializable {
+public class Programa  implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 
+	@OneToMany(mappedBy="programa")
+	private Set<Competicao> competicoes = new HashSet<>();
 
-	// *** CONFERIDO ***
-	@JsonIgnore
-	@ManyToMany(mappedBy="classes")
-	private List<Formato> formatos = new ArrayList<>();
-
-	
-
-
-	public Classe() {
+	public Programa() {
 		
 	}
 
-	public Classe(Integer id, String nome) {
+	public Programa(Integer id, String nome) {
 		super();
 		this.id = id;
 		this.nome = nome;
 	}
 
+	
+	
 	public Integer getId() {
 		return id;
 	}
@@ -57,13 +51,13 @@ public class Classe implements Serializable {
 		this.nome = nome;
 	}
 
-	public List<Formato> getFormatos() {
-		return formatos;
+	public Set<Competicao> getCompeticoes() {
+		return competicoes;
 	}
 
-	public void setFormatos(List<Formato> formatos) {
-		this.formatos = formatos;
-	}	
+	public void setCompeticoes(Set<Competicao> competicoes) {
+		this.competicoes = competicoes;
+	}
 
 	@Override
 	public int hashCode() {
@@ -81,7 +75,7 @@ public class Classe implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Classe other = (Classe) obj;
+		Programa other = (Programa) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -91,5 +85,5 @@ public class Classe implements Serializable {
 	}
 	
 	
-	
+
 }

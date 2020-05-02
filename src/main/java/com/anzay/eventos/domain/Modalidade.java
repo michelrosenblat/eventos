@@ -2,12 +2,16 @@ package com.anzay.eventos.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -23,40 +27,28 @@ public class Modalidade implements Serializable {
 	private Integer id;
 	private String nome;
 
-	// join com ESTILOS
-	//@JsonManagedReference
-	@ManyToMany(mappedBy = "modalidades")
-	private List<Estilo> estilos = new ArrayList<>();
 
-	// join com CLASSES
-	//@JsonManagedReference
-	@ManyToMany(mappedBy = "modalidades")
-	private List<Classe> classes = new ArrayList<>();
-		
-	// join com COMPETIDORES
-	//@JsonManagedReference
-	@ManyToMany(mappedBy = "modalidades")
-	private List<Competidor> competidores = new ArrayList<>();
-		
-	// join com ARBITROS
-	//@JsonManagedReference
-	@ManyToMany(mappedBy = "modalidades")
-	private List<Arbitro> arbitros = new ArrayList<>();
-
-/*	
-	// join com FORMATOS
-	@JsonIgnore
-	@ManyToOne
-	@JoinColumn(name="formato_id")
-	private Formato formato;
+/*
+  	@JsonIgnore
+	@ManyToMany(mappedBy="modalidades")
+	private Set<Arbitro> arbitros = new HashSet<>();
 */
+	@ManyToMany
+	@JoinTable(name = "MODALIDADES_DO_ARBITRO",
+		joinColumns = @JoinColumn(name = "modalidade_id"),
+		inverseJoinColumns = @JoinColumn(name = "arbitro_id")
+	)
+	private Set<Arbitro> arbitros = new HashSet<>();
 
-	// join com ARBITROS
-	//@JsonManagedReference
+
+	// *** CONFERIDO ***
 	@JsonIgnore
-	@OneToMany(mappedBy = "modalidade")
-	private List<Formato> formatos;
+	@OneToMany(mappedBy="modalidade")
+	private List<Formato> formatos = new ArrayList<>();
 
+	//@JsonIgnore
+	@ManyToMany(mappedBy="modalidades")								// lista na outra classe
+	private Set<Estilo> estilos = new HashSet<>();		// lista que a outra classe usará
 	
 	public Modalidade() {
 	}
@@ -86,35 +78,21 @@ public class Modalidade implements Serializable {
 		this.nome = nome;
 	}
 
-	public List<Estilo> getEstilos() {
+	public Set<Estilo> getEstilos() {
 		return estilos;
 	}
 
-	public void setEstilos(List<Estilo> estilos) {
+	public void setEstilos(Set<Estilo> estilos) {
 		this.estilos = estilos;
 	}
 
-	public List<Classe> getClasses() {
-		return classes;
-	}
 
-	public void setClasses(List<Classe> classes) {
-		this.classes = classes;
-	}
 
-	public List<Competidor> getCompetidores() {
-		return competidores;
-	}
-
-	public void setCompetidores(List<Competidor> competidores) {
-		this.competidores = competidores;
-	}
-
-	public List<Arbitro> getArbitros() {
+	public Set<Arbitro> getArbitros() {
 		return arbitros;
 	}
 
-	public void setArbitros(List<Arbitro> arbitros) {
+	public void setArbitros(Set<Arbitro> arbitros) {
 		this.arbitros = arbitros;
 	}
 

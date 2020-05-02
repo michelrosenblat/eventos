@@ -2,7 +2,9 @@ package com.anzay.eventos.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -26,41 +29,42 @@ public class Formato implements Serializable {
 	private Integer id;
 	private String nome;
 
-	// MODALIDADE
+	// *** CONFERIDO ***
+	//
 	@ManyToOne
 	@JoinColumn(name="modalidade_id")
 	private Modalidade modalidade;
 	
-
-	// TIPO PARTICIPANTE
 	@ManyToOne
 	@JoinColumn(name="tipoParticipante_id")
-	private TipoParticipante tipoParticipante = new TipoParticipante(); 
+	private TipoParticipante tipoParticipante; 
 
-	// join com CLASSES
-	//@JsonManagedReference
-	@ManyToMany(mappedBy = "formatos")
+
+	@ManyToMany
+	@JoinTable(name = "CLASSES_DO_FORMATO",
+		joinColumns = @JoinColumn(name = "formato_id"),
+		inverseJoinColumns = @JoinColumn(name = "classe_id")
+	)
 	private List<Classe> classes = new ArrayList<>();
 
-	// join com FAIXA ETÁRIA
-	//@JsonManagedReference
-	@ManyToMany(mappedBy = "formatos")
+	@ManyToMany
+	@JoinTable(name = "FAIXAETARIAS_DO_FORMATO",
+		joinColumns = @JoinColumn(name = "formato_id"),
+		inverseJoinColumns = @JoinColumn(name = "faixaetaria_id")
+	)
 	private List<FaixaEtaria> faixaEtarias = new ArrayList<>();
 
-	// join com ESTILOS
-	//@JsonManagedReference
-	@ManyToMany(mappedBy = "formatos")
+	// *** CONFERIDO ***
+	@ManyToMany
+	@JoinTable(name = "ESTILOS_DO_FORMATO",
+		joinColumns = @JoinColumn(name = "formato_id"),
+		inverseJoinColumns = @JoinColumn(name = "estilo_id")
+	)
 	private List<Estilo> estilos = new ArrayList<>();
 
-	// join com FORMATO
 	@JsonIgnore
-	@ManyToMany
-	@JoinTable(
-			name = "FORMATOS_DA_COMPETICAO",
-			joinColumns = @JoinColumn(name = "formato_id"),
-			inverseJoinColumns = @JoinColumn(name = "competicao_id")
-	)
-	private List<Competicao> competicoes = new ArrayList<>();
+	@OneToMany(mappedBy="formato")
+	private Set<Competicao> competicoes = new HashSet<>();
 	
 	
 	public Formato() {
@@ -136,11 +140,11 @@ public class Formato implements Serializable {
 	}
 
 	
-	public List<Competicao> getCompeticoes() {
+	public Set<Competicao> getCompeticoes() {
 		return competicoes;
 	}
 
-	public void setCompeticoes(List<Competicao> competicoes) {
+	public void setCompeticoes(Set<Competicao> competicoes) {
 		this.competicoes = competicoes;
 	}
 

@@ -1,11 +1,16 @@
 package com.anzay.eventos.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class TipoParticipante implements Serializable {
@@ -19,6 +24,31 @@ public class TipoParticipante implements Serializable {
 	private Integer minCompedidores;
 	private Integer maxCompedidores;
 	
+	public Integer getMinCompedidores() {
+		return minCompedidores;
+	}
+
+
+	public void setMinCompedidores(Integer minCompedidores) {
+		this.minCompedidores = minCompedidores;
+	}
+
+
+	public Integer getMaxCompedidores() {
+		return maxCompedidores;
+	}
+
+
+	public void setMaxCompedidores(Integer maxCompedidores) {
+		this.maxCompedidores = maxCompedidores;
+	}
+
+	@JsonIgnore
+	@OneToMany(mappedBy="tipoParticipante")
+	private List<Formato> formatos = new ArrayList<>();
+	
+
+
 	public TipoParticipante() {
 		
 	}
@@ -67,6 +97,15 @@ public class TipoParticipante implements Serializable {
 	public void setMaxParticipantes(Integer maxCompedidores) {
 		this.maxCompedidores = maxCompedidores;
 	}
+	
+	public List<Formato> getFormatos() {
+		return formatos;
+	}
+
+	public void setFormatos(List<Formato> formatos) {
+		this.formatos = formatos;
+	}
+
 
 	@Override
 	public int hashCode() {

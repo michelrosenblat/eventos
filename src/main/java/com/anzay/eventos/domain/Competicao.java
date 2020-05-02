@@ -1,16 +1,18 @@
 package com.anzay.eventos.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Competicao  implements Serializable {
@@ -21,42 +23,36 @@ public class Competicao  implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	
-	// join com FORMATO
-	@ManyToMany(mappedBy = "competicoes")
-	private List<Formato> formatos = new ArrayList<>();
 
-
-
-	// join com INSCRICAO_COMPETICAO
-	@ManyToMany
-	@JoinTable(
-			name = "INSCRICOES_DA_COMPETICAO",
-			joinColumns = @JoinColumn(name = "competicao_id"),
-			inverseJoinColumns = @JoinColumn(name = "inscricaoCompeticao_id")
-	)
-	private List<InscricaoCompeticao> inscricoesCompeticao = new ArrayList<>();
+	@ManyToOne
+	@JoinColumn(name="formato_id")
+	private Formato formato;
 	
+	@OneToMany(mappedBy="competicao")
+	private Set<Inscricao> inscricoes = new HashSet<>();
 	
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="programa_id")
+	private Programa programa; 
 	
+			
 	public Competicao() {
 		
 	}
 
 
-	public Competicao(Integer id, String nome) {
+	public Competicao(Integer id, String nome, Formato formato) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.formato = formato;
 	}
-
-
 
 
 	public Integer getId() {
 		return id;
 	}
-
 
 	public void setId(Integer id) {
 		this.id = id;
@@ -73,25 +69,26 @@ public class Competicao  implements Serializable {
 	}
 
 
-	public List<Formato> getFormatos() {
-		return formatos;
+	public Formato getFormato() {
+		return formato;
 	}
 
 
-	public void setFormatos(List<Formato> formatos) {
-		this.formatos = formatos;
+	public void setFormato(Formato formato) {
+		this.formato = formato;
 	}
 
 
-	public List<InscricaoCompeticao> getCompetices() {
-		return inscricoesCompeticao;
+	public Set<Inscricao> getInscricoes() {
+		return inscricoes;
 	}
 
 
-	public void setCompetices(List<InscricaoCompeticao> inscricoesCompeticao) {
-		this.inscricoesCompeticao = inscricoesCompeticao;
+	public void setInscricoes(Set<Inscricao> inscricoes) {
+		this.inscricoes = inscricoes;
 	}
 
+	
 
 	@Override
 	public int hashCode() {

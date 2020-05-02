@@ -8,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -26,16 +24,10 @@ public class FaixaEtaria implements Serializable {
 	private Integer idadeMin;
 	private Integer idadeMax;
 
-	// join com MODALIDADE
 	@JsonIgnore
-	//@JsonBackReference
-	@ManyToMany
-	@JoinTable(
-			name = "FAIXAETARIA_DO_FORMATO",
-			joinColumns = @JoinColumn(name = "faixaetaria_id"),
-			inverseJoinColumns = @JoinColumn(name = "formato_id")
-	)
+	@ManyToMany(mappedBy="faixaEtarias")
 	private List<Formato> formatos = new ArrayList<>();
+
 	
 	
 		

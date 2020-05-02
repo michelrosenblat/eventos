@@ -1,8 +1,8 @@
 package com.anzay.eventos.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,28 +24,25 @@ public class Estilo implements Serializable {
 	private Integer id;
 	private String nome;
 
-	// join com MODALIDADE
-	@JsonIgnore
-	//@JsonBackReference
-	@ManyToMany
-	@JoinTable(
-			name = "ESTILOS_DA_MODALIDADE",
-			joinColumns = @JoinColumn(name = "estilo_id"),
-			inverseJoinColumns = @JoinColumn(name = "modalidade_id")
-	)
-	private List<Modalidade> modalidades = new ArrayList<>();
 
-	// join com FORMATO
+	/*
 	@JsonIgnore
-	//@JsonBackReference
+	@ManyToMany(mappedBy="estilos")								// lista na outra classe
+	private Set<Modalidade> modalidades = new HashSet<>();		// lista que a outra classe usará
+*/
+	@JsonIgnore
 	@ManyToMany
-	@JoinTable(
-			name = "ESTILOS_DO_FORMATO",
-			joinColumns = @JoinColumn(name = "estilo_id"),
-			inverseJoinColumns = @JoinColumn(name = "formato_id")
+	@JoinTable(name = "ESTILOS_DA_MODALIDADE",
+		joinColumns = @JoinColumn(name = "estilo_id"),
+		inverseJoinColumns = @JoinColumn(name = "modalidade_id")
 	)
-	private List<Formato> formatos = new ArrayList<>();
+	private Set<Modalidade> modalidades = new HashSet<>();
 
+	
+	// *** CONFERIDO ***
+	@JsonIgnore
+	@ManyToMany(mappedBy="estilos")
+	private Set<Formato> formatos = new HashSet<>();
 	
 	
 	public Estilo() {
@@ -74,21 +71,21 @@ public class Estilo implements Serializable {
 		this.nome = nome;
 	}
 
-	public List<Modalidade> getModalidades() {
+	public Set<Modalidade> getModalidades() {
 		return modalidades;
 	}
 
-	public void setModalidades(List<Modalidade> modalidades) {
+	public void setModalidades(Set<Modalidade> modalidades) {
 		this.modalidades = modalidades;
 	}
 	
 	
 
-	public List<Formato> getFormatos() {
+	public Set<Formato> getFormatos() {
 		return formatos;
 	}
 
-	public void setFormatos(List<Formato> formatos) {
+	public void setFormatos(Set<Formato> formatos) {
 		this.formatos = formatos;
 	}
 

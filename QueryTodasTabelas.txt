@@ -1,34 +1,72 @@
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- SO TABELAS
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-
-select * from ARBITROS_DA_MODALIDADE;
 select * from CLASSE;
-select * from CLASSES_DA_MODALIDADE;
 select * from CLASSES_DO_FORMATO;
-select * from COMPETIDORES_DA_MODALIDADE;
+select * from COMPETICAO;
+select * from COMPETIDORES_DA_INSCRICAO;
 select * from ENDERECO;
 select * from ESTILO;
 select * from ESTILOS_DA_MODALIDADE;
 select * from ESTILOS_DO_FORMATO;
-select * from FAIXAETARIA_DO_FORMATO;
+select * from FAIXAETARIAS_DO_FORMATO;
 select * from FAIXA_ETARIA;
 select * from FORMATO;
+select * from INSCRIAO;
 select * from MODALIDADE;
+select * from MODALIDADES_DO_ARBITRO;
 select * from PESSOA;
 select * from TIPO_PARTICIPANTE;
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-SQL - Todas competi��es
+-- INSCRICOES
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-select comp.nome, form.id, form.nome, mod.nome Modalidade, tpPart.nome TipoPartic, classe.nome Classes, faixaetaria.nome FaixaEtarias, est.nome Estilos
+select comp.id "ID_COMPETICAO", comp.nome "COMPETIÇÃO", insc.id "ID_INCRICAO", insc.data_inscricao, atleta.id "ID_ATLETA", atleta.nome
     from
         COMPETICAO comp
     left outer join
-        FORMATOS_DA_COMPETICAO formComp
-            on formComp.competicao_id = comp.id
+        INSCRICAO insc
+            on insc.competicao_id = comp.id
+    left outer join
+        COMPETIDORES_DA_INSCRICAO compInsc
+            on compInsc.inscricao_id = insc.id
+    left outer join
+        PESSOA atleta
+            on atleta.id = compInsc.competidor_id;
+
+
+select * from CLASSE;
+select * from CLASSES_DO_FORMATO;
+select * from COMPETICAO;
+select * from COMPETIDORES_DA_INSCRICAO;
+select * from ENDERECO;
+select * from ESTILO;
+select * from ESTILOS_DA_MODALIDADE;
+select * from ESTILOS_DO_FORMATO;
+select * from FAIXAETARIAS_DO_FORMATO;
+select * from FAIXA_ETARIA;
+select * from FORMATO;
+select * from INSCRICAO;
+select * from MODALIDADE;
+select * from MODALIDADES_DO_ARBITRO;
+select * from PESSOA;
+select * from TIPO_PARTICIPANTE;
+
+
+            
+            
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- COMPETICOES
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+select comp.id, comp.nome, form.id, form.nome, mod.nome Modalidade, tpPart.nome TipoPartic, classe.nome Classes, faixaetaria.nome FaixaEtarias, est.nome Estilos
+    from
+        COMPETICAO comp
     left outer join
         FORMATO form
-            on form.id = formComp.formato_id
+            on form.id = comp.formato_id
     left outer join
         MODALIDADE mod
             on mod.id = form.modalidade_id
@@ -42,7 +80,7 @@ select comp.nome, form.id, form.nome, mod.nome Modalidade, tpPart.nome TipoParti
         CLASSE classe
             on formClasse.classe_id = classe.id
     left outer join
-        FAIXAETARIA_DO_FORMATO formFaixaEtaria
+        FAIXAETARIAS_DO_FORMATO formFaixaEtaria
             on formFaixaEtaria.formato_id = form.id
     left outer join
         FAIXA_ETARIA faixaetaria
@@ -53,12 +91,28 @@ select comp.nome, form.id, form.nome, mod.nome Modalidade, tpPart.nome TipoParti
     left outer join
         ESTILO est
             on est.id = formEstilos.estilo_id;
+
+select * from CLASSE;
+select * from CLASSES_DO_FORMATO;
+select * from COMPETICAO;
+select * from ENDERECO;
+select * from ESTILO;
+select * from ESTILOS_DA_MODALIDADE;
+select * from ESTILOS_DO_FORMATO;
+select * from FAIXAETARIAS_DO_FORMATO;
+select * from FAIXA_ETARIA;
+select * from FORMATO;
+select * from INSCRICAO;
+select * from MODALIDADE;
+select * from MODALIDADES_DO_ARBITRO;
+select * from PESSOA;
+select * from TIPO_PARTICIPANTE;
             
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-SQL - Todos formatos
+-- FORMATOS
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-select form.id, mod.nome Modalidade, tpPart.nome TipoPartic, classe.nome Classes, faixaetaria.nome FaixaEtarias, est.nome Estilos
+select form.id, form.nome, mod.nome Modalidade, tpPart.nome TipoPartic, classe.nome Classes, faixaetaria.nome FaixaEtarias, est.nome Estilos
     from
         FORMATO form
     left outer join
@@ -74,7 +128,7 @@ select form.id, mod.nome Modalidade, tpPart.nome TipoPartic, classe.nome Classes
         CLASSE classe
             on formClasse.classe_id = classe.id
     left outer join
-        FAIXAETARIA_DO_FORMATO formFaixaEtaria
+        FAIXAETARIAS_DO_FORMATO formFaixaEtaria
             on formFaixaEtaria.formato_id = form.id
     left outer join
         FAIXA_ETARIA faixaetaria
@@ -85,4 +139,20 @@ select form.id, mod.nome Modalidade, tpPart.nome TipoPartic, classe.nome Classes
     left outer join
         ESTILO est
             on est.id = formEstilos.estilo_id;
-            
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+COMPETIÇÃO E INSCRIÇÕES            
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+select * from COMPETICAO;
+
+select * from  INSCRICAO_PARA_COMPETICAO ;
+
+select * from COMPETIDORES_DA_INSCRICAO ;
+
+select * from  INSCRICOES_DA_COMPETICAO; 
+
+select * from FORMATO;            
+
+select * from TIPO_PARTICIPANTE;

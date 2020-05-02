@@ -30,7 +30,6 @@ public class Endereco implements Serializable {
 	private String cep;
 
 	@JsonIgnore
-	//@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="pessoa_id")
 	private Pessoa pessoa;
