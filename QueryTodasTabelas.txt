@@ -156,3 +156,50 @@ select * from  INSCRICOES_DA_COMPETICAO;
 select * from FORMATO;            
 
 select * from TIPO_PARTICIPANTE;
+
+
+
+
+
+
+
+
+
+select * from PROGRAMA;
+
+select prg.nome "PROGRAMA", comp.id "ID_COMPETICAO", comp.nome "COMPETIÇÃO", insc.id "ID_INCRICAO", insc.data_inscricao, atleta.id "ID_ATLETA", atleta.nome
+    from
+        PROGRAMA prg
+    left outer join
+        COMPETICAO comp
+            on comp.programa_id = comp.id
+    left outer join
+        INSCRICAO insc
+            on insc.competicao_id = comp.id
+    left outer join
+        COMPETIDORES_DA_INSCRICAO compInsc
+            on compInsc.inscricao_id = insc.id
+    left outer join
+        PESSOA atleta
+            on atleta.id = compInsc.competidor_id;
+
+
+
+
+select * from CLASSE;
+select * from CLASSES_DO_FORMATO;
+select * from COMPETICAO;
+select * from COMPETIDORES_DA_INSCRICAO;
+select * from ENDERECO;
+select * from ESTILO;
+select * from ESTILOS_DA_MODALIDADE;
+select * from ESTILOS_DO_FORMATO;
+select * from FAIXAETARIAS_DO_FORMATO;
+select * from FAIXA_ETARIA;
+select * from FORMATO;
+select * from INSCRICAO;
+select * from MODALIDADE;
+select * from MODALIDADES_DO_ARBITRO;
+select * from PESSOA;
+select * from PROGRMA;
+select * from TIPO_PARTICIPANTE;

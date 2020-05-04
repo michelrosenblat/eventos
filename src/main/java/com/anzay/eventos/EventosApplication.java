@@ -20,6 +20,7 @@ import com.anzay.eventos.domain.Formato;
 import com.anzay.eventos.domain.Inscricao;
 import com.anzay.eventos.domain.Modalidade;
 import com.anzay.eventos.domain.Pessoa;
+import com.anzay.eventos.domain.Programa;
 import com.anzay.eventos.domain.TipoParticipante;
 import com.anzay.eventos.domain.enums.Sexo;
 import com.anzay.eventos.domain.enums.TipoDocumento;
@@ -36,6 +37,7 @@ import com.anzay.eventos.repositories.FormatoRepository;
 import com.anzay.eventos.repositories.InscricaoRepository;
 import com.anzay.eventos.repositories.ModalidadeRepository;
 import com.anzay.eventos.repositories.PessoaRepository;
+import com.anzay.eventos.repositories.ProgramaRepository;
 import com.anzay.eventos.repositories.TipoParticipanteRepository;
 
 
@@ -78,6 +80,9 @@ public class EventosApplication implements CommandLineRunner {
 	
 	@Autowired
 	private PessoaRepository pessoaRepository;
+	
+	@Autowired
+	private ProgramaRepository programaRepository;
 	
 	@Autowired
 	private TipoParticipanteRepository tipoParticipanteRepository;
@@ -347,22 +352,36 @@ public class EventosApplication implements CommandLineRunner {
 		
 
 		// ----------------------------------------------------------------------------
-		// COMPETICAO
+		// PROGRAMA E COMPETIÇOES
 		// ----------------------------------------------------------------------------
+
+
+		// ------------------------------------------------------------------------------------------
+		// PROGRAMA 
+
+		Programa prgFIDES = new Programa(null, "FIDES 2019");
+		
 
 		// ------------------------------------------------------------------------------------------
 		// COMPETICAO 
 
-		Competicao compStdAdulto = new Competicao(null, "FIDES2019 - Standard Classe E/F Adulto ", fmt1);
-		Competicao compLatAdulto = new Competicao(null, "FIDES2019 - Latin Classe E/F Adulto ", fmt2);
-		Competicao compSoloLatYouth = new Competicao(null, "FIDES2019 - Solo Latin D Youth", fmt3);
+		Competicao compStdAdulto = new Competicao(null, "FIDES2019 - Standard Classe E/F Adulto ", fmt1, prgFIDES);
+		Competicao compLatAdulto = new Competicao(null, "FIDES2019 - Latin Classe E/F Adulto ", fmt2, prgFIDES);
+		Competicao compSoloLatYouth = new Competicao(null, "FIDES2019 - Solo Latin D Youth", fmt3, prgFIDES);
 
 
 		fmt1.getCompeticoes().addAll(Arrays.asList(compStdAdulto));
 		fmt2.getCompeticoes().addAll(Arrays.asList(compLatAdulto));
 		fmt3.getCompeticoes().addAll(Arrays.asList(compSoloLatYouth));
 
+		
+		prgFIDES.getCompeticoes().addAll(Arrays.asList(compStdAdulto,compLatAdulto, compSoloLatYouth));
+
+		programaRepository.saveAll(Arrays.asList(prgFIDES));
+
+
 		competicaoRepository.saveAll(Arrays.asList(compStdAdulto, compLatAdulto, compSoloLatYouth));
+
 		
 
 		// ------------------------------------------------------------------------------------------

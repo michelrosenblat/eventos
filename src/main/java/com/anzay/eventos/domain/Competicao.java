@@ -42,12 +42,19 @@ public class Competicao  implements Serializable {
 	}
 
 
-	public Competicao(Integer id, String nome, Formato formato) {
+
+
+
+
+	public Competicao(Integer id, String nome, Formato formato, Programa programa) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.formato = formato;
+		this.programa = programa;
 	}
+
+
 
 
 	public Integer getId() {
@@ -88,7 +95,17 @@ public class Competicao  implements Serializable {
 		this.inscricoes = inscricoes;
 	}
 
-	
+	public Programa getPrograma() {
+		return programa;
+	}
+
+
+	public void setPrograma(Programa programa) {
+		this.programa = programa;
+	}
+
+
+
 
 	@Override
 	public int hashCode() {
