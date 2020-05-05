@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import com.anzay.eventos.domain.enums.Sexo;
 import com.anzay.eventos.domain.enums.TipoDocumento;
@@ -17,7 +18,11 @@ public class Competidor extends Dancarino{
 
 	private static final long serialVersionUID = 1L;
 
-  	@JsonIgnore
+	@JsonIgnore
+	@OneToMany(mappedBy="leader")
+	private Set<Inscricao> inscricoesLeader = new HashSet<>();
+
+	@JsonIgnore
 	@ManyToMany(mappedBy="competidores")
 	private Set<Inscricao> inscricoes = new HashSet<>();
   	

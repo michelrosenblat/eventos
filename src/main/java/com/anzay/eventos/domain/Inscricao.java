@@ -34,6 +34,12 @@ public class Inscricao  implements Serializable {
 	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date dataInscricao;
 
+	//@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="leader_id")
+	private Competidor leader;
+	
+
 	@ManyToMany
 	@JoinTable(name = "COMPETIDORES_DA_INSCRICAO",
 		joinColumns = @JoinColumn(name = "inscricao_id"),
@@ -46,11 +52,12 @@ public class Inscricao  implements Serializable {
 		
 	}
 
-	public Inscricao(Integer id, Competicao competicao, Date dataInscricao) {
+	public Inscricao(Integer id, Competicao competicao, Date dataInscricao, Competidor leader) {
 		super();
 		this.id = id;
 		this.competicao = competicao;
 		this.dataInscricao = dataInscricao;
+		this.leader = leader;
 	}
 
 
@@ -85,6 +92,16 @@ public class Inscricao  implements Serializable {
 
 	public void setDataInscricao(Date dataInscricao) {
 		this.dataInscricao = dataInscricao;
+	}
+
+	
+	
+	public Competidor getLeader() {
+		return leader;
+	}
+
+	public void setLeader(Competidor leader) {
+		this.leader = leader;
 	}
 
 	@Override

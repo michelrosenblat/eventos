@@ -13,10 +13,11 @@ select * from ESTILOS_DO_FORMATO;
 select * from FAIXAETARIAS_DO_FORMATO;
 select * from FAIXA_ETARIA;
 select * from FORMATO;
-select * from INSCRIAO;
+select * from INSCRICAO;
 select * from MODALIDADE;
 select * from MODALIDADES_DO_ARBITRO;
 select * from PESSOA;
+select * from PROGRAMA;
 select * from TIPO_PARTICIPANTE;
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -52,6 +53,7 @@ select * from INSCRICAO;
 select * from MODALIDADE;
 select * from MODALIDADES_DO_ARBITRO;
 select * from PESSOA;
+select * from PROGRAMA;
 select * from TIPO_PARTICIPANTE;
 
 
@@ -95,6 +97,7 @@ select comp.id, comp.nome, form.id, form.nome, mod.nome Modalidade, tpPart.nome 
 select * from CLASSE;
 select * from CLASSES_DO_FORMATO;
 select * from COMPETICAO;
+select * from COMPETIDORES_DA_INSCRICAO;
 select * from ENDERECO;
 select * from ESTILO;
 select * from ESTILOS_DA_MODALIDADE;
@@ -106,6 +109,7 @@ select * from INSCRICAO;
 select * from MODALIDADE;
 select * from MODALIDADES_DO_ARBITRO;
 select * from PESSOA;
+select * from PROGRAMA;
 select * from TIPO_PARTICIPANTE;
             
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -140,30 +144,27 @@ select form.id, form.nome, mod.nome Modalidade, tpPart.nome TipoPartic, classe.n
         ESTILO est
             on est.id = formEstilos.estilo_id;
 
+select * from CLASSE;
+select * from CLASSES_DO_FORMATO;
+select * from COMPETICAO;
+select * from COMPETIDORES_DA_INSCRICAO;
+select * from ENDERECO;
+select * from ESTILO;
+select * from ESTILOS_DA_MODALIDADE;
+select * from ESTILOS_DO_FORMATO;
+select * from FAIXAETARIAS_DO_FORMATO;
+select * from FAIXA_ETARIA;
+select * from FORMATO;
+select * from INSCRICAO;
+select * from MODALIDADE;
+select * from MODALIDADES_DO_ARBITRO;
+select * from PESSOA;
+select * from PROGRAMA;
+select * from TIPO_PARTICIPANTE;
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 COMPETIÇÃO E INSCRIÇÕES            
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-select * from COMPETICAO;
-
-select * from  INSCRICAO_PARA_COMPETICAO ;
-
-select * from COMPETIDORES_DA_INSCRICAO ;
-
-select * from  INSCRICOES_DA_COMPETICAO; 
-
-select * from FORMATO;            
-
-select * from TIPO_PARTICIPANTE;
-
-
-
-
-
-
-
-
 
 select * from PROGRAMA;
 
@@ -201,5 +202,23 @@ select * from INSCRICAO;
 select * from MODALIDADE;
 select * from MODALIDADES_DO_ARBITRO;
 select * from PESSOA;
-select * from PROGRMA;
+select * from PROGRAMA;
 select * from TIPO_PARTICIPANTE;
+
+
+
+#######################################################################################################################################################
+JSON
+Formato
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+INSERT:
+	POST
+	Body
+	raw / JSON
+
+{
+	"nome": "Pro/Am Latin Classe C",
+	"tipoParticipante": { "id" : 7 },
+	"modalidade": {  "id": 2 }
+}
+	

@@ -387,10 +387,10 @@ public class EventosApplication implements CommandLineRunner {
 		// ------------------------------------------------------------------------------------------
 		// INSCRIÇÃO 
 
-		Inscricao insc1 = new Inscricao(null, compStdAdulto, sdf.parse("11/09/2019 12:01"));
-		Inscricao insc2 = new Inscricao(null, compStdAdulto, sdf.parse("18/09/2019 15:25"));
-		Inscricao insc3 = new Inscricao(null, compStdAdulto, sdf.parse("05/10/2019 09:37"));
-		Inscricao insc4 = new Inscricao(null, compSoloLatYouth, sdf.parse("05/10/2019 09:51"));
+		Inscricao insc1 = new Inscricao(null, compStdAdulto, sdf.parse("11/09/2019 12:01"), comp1);
+		Inscricao insc2 = new Inscricao(null, compStdAdulto, sdf.parse("18/09/2019 15:25"), comp3);
+		Inscricao insc3 = new Inscricao(null, compStdAdulto, sdf.parse("05/10/2019 09:37"), comp5);
+		Inscricao insc4 = new Inscricao(null, compSoloLatYouth, sdf.parse("05/10/2019 09:51"), comp6);
 
 		insc1.getCompetidores().addAll(Arrays.asList(comp1, comp2));
 		insc2.getCompetidores().addAll(Arrays.asList(comp3, comp4));

@@ -11,20 +11,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.anzay.eventos.domain.Formato;
-import com.anzay.eventos.services.FormatoService;
+import com.anzay.eventos.domain.TipoParticipante;
+import com.anzay.eventos.services.TipoParticipanteService;
 
 @RestController
-@RequestMapping(value="/formatos")
-public class FormatoResource {
+@RequestMapping(value="/tipoParticipantes")
+public class TipoParticipanteResource {
 
 	@Autowired
-	private FormatoService service;
+	private TipoParticipanteService service;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 
-		Formato obj = service.find(id);
+		TipoParticipante obj = service.find(id);
 		
 		return ResponseEntity.ok().body(obj);
 		
@@ -32,7 +32,7 @@ public class FormatoResource {
 	
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody Formato obj) {
+	public ResponseEntity<Void> insert(@RequestBody TipoParticipante obj) {
 		
 		obj = service.insert(obj);
 		

@@ -5,28 +5,28 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.anzay.eventos.domain.Formato;
-import com.anzay.eventos.repositories.FormatoRepository;
+import com.anzay.eventos.domain.TipoParticipante;
+import com.anzay.eventos.repositories.TipoParticipanteRepository;
 import com.anzay.eventos.services.exceptions.ObjectNotFoundException;
 
 
 @Service
-public class FormatoService {
+public class TipoParticipanteService {
 	
 	@Autowired
-	private FormatoRepository repo;
+	private TipoParticipanteRepository repo;
 	
-	public Formato find(Integer id) {
+	public TipoParticipante find(Integer id) {
 		
-		Optional<Formato> obj = repo.findById(id);
+		Optional<TipoParticipante> obj = repo.findById(id);
 		
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + 
-				" - Tipo: " + Formato.class.getName()) );
+				" - Tipo: " + TipoParticipante.class.getName()) );
 		
 	}
 	
-	public Formato insert(Formato obj) {
+	public TipoParticipante insert(TipoParticipante obj) {
 		
 		obj.setId(null);
 		
