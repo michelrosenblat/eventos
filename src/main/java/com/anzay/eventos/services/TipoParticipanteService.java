@@ -33,4 +33,11 @@ public class TipoParticipanteService {
 		return repo.save(obj);
 		
 	}
+	
+	public TipoParticipante update(TipoParticipante obj) {
+		
+		find(obj.getId());
+		return repo.save(obj);
+		
+	}
 } 

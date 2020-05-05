@@ -29,7 +29,13 @@ public class FormatoService {
 	public Formato insert(Formato obj) {
 		
 		obj.setId(null);
+		return repo.save(obj);
 		
+	}
+
+	public Formato update(Formato obj) {
+		
+		find(obj.getId());
 		return repo.save(obj);
 		
 	}
